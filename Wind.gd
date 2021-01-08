@@ -18,5 +18,5 @@ func _ready():
 	var speed=world.windspeed.length()
 	self.process_material.set("initial_velocity", speed)
 	self.lifetime = 800/speed * 5
-	self.rotation = - atan2(world.windspeed.y, world.windspeed.x)
+	self.rotation = atan2(world.windspeed.y, world.windspeed.x)-deg2rad(90)
 	#self.position = (-Vector2(sqrt(500*500*2), 0)).rotated(self.rotation)
