@@ -18,7 +18,7 @@ extents = Vector2( 31.8383, 6.46887 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
-emission_box_extents = Vector3( 1200, 1200, 1 )
+emission_box_extents = Vector3( 800, 800, 1 )
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
@@ -92,7 +92,7 @@ shape = SubResource( 2 )
 
 [node name="Wind" type="Particles2D" parent="."]
 rotation = -0.785398
-amount = 40
+amount = 80
 lifetime = 5.0
 preprocess = 5.0
 visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
