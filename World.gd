@@ -4,7 +4,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var windspeed=Vector2(100, 100)*3
+var windspeed=Vector2(50, 50)*3
 
 
 # Called when the node enters the scene tree for the first time.

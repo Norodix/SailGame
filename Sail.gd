@@ -1,12 +1,12 @@
 extends RigidBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
 var maxangle=30
 var tightenpersec=45
-var forceCoefficient=15
+var forceCoefficient=5
+var windForce
+var lineTaut
 
 
 
@@ -35,17 +35,22 @@ func _integrate_forces(state):
 	var pinX = get_node("../PinJoint2D").position.x #should be 32
 	#print(pinX)
 	
-	if (self.rotation_degrees > maxangle):
+	if (self.rotation_degrees > maxangle*0.98):
 		self.rotation_degrees=maxangle
 		self.angular_velocity=0
 		#self.position = Vector2(-pinX, 0).rotated(self.rotation) + Vector2(pinX, 0)
+		lineTaut=true
 		framenum=2
 		
-	if (self.rotation_degrees < -maxangle):
+	elif (self.rotation_degrees < -maxangle*0.98):
 		self.rotation_degrees=-maxangle
 		self.angular_velocity=0
+		lineTaut=true
 		#self.position = Vector2(-pinX, 0).rotated(self.rotation) + Vector2(pinX, 0)
 		framenum=0
+		
+	else:
+		lineTaut=false
 	
 	$Sail.frame=framenum
 	
@@ -58,7 +63,8 @@ func _integrate_forces(state):
 	var Gwindspeed=get_node("/root/World").windspeed
 	var wind = Gwindspeed - (parent.linear_velocity+self.linear_velocity)
 	#The sail excertes a push perpendicular to its surface
-	self.applied_force = (wind.dot(normal))*(normal)*forceCoefficient
+	windForce = (wind.dot(normal))*(normal)*forceCoefficient
+	self.applied_force = windForce
 	var windlabel=get_node("/root/World/GUI/WindSpeed")
 	windlabel.text="Wind speed: " + str(round(wind.length()))
 	#print("Wind speed: ", wind.length())

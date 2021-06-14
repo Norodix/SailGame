@@ -25,6 +25,5 @@ func _process(delta):
 	#Get player position and move accordingly
 	#Particles are locked to the world, not locally rendered, moving emmitter does not move them
 	var Player=get_node("/root/World/PlayerBoat")
-	print(Player)
 	self.position = Player.position + Vector2(-500, -400)
-	print(Player.position)
+
