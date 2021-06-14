@@ -1,6 +1,5 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Player.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://Sail.gd" type="Script" id=3]
 [ext_resource path="res://Art/sails.png" type="Texture" id=4]
@@ -8,6 +7,7 @@
 [ext_resource path="res://Art/Windgush.png" type="Texture" id=6]
 [ext_resource path="res://World.gd" type="Script" id=7]
 [ext_resource path="res://Wind.gd" type="Script" id=8]
+[ext_resource path="res://Art/Ocean/seamless.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -18,17 +18,13 @@ extents = Vector2( 31.8383, 6.46887 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
-emission_box_extents = Vector3( 800, 800, 1 )
-flag_disable_z = true
+emission_box_extents = Vector3( 800, 1, 1 )
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
+initial_velocity = 424.0
 scale = 10.0
 scale_random = 1.0
-color = Color( 0.407843, 0.788235, 0.8, 0.352941 )
 
 [node name="World" type="Node2D"]
 position = Vector2( 450.319, 237.071 )
@@ -37,91 +33,91 @@ script = ExtResource( 7 )
 [node name="PlayerBoat" type="RigidBody2D" parent="."]
 mass = 11.33
 can_sleep = false
-linear_damp = 0.3
+linear_damp = 0.5
 script = ExtResource( 2 )
 
 [node name="BoatBody" type="Sprite" parent="PlayerBoat"]
-position = Vector2( 12.0621, 0 )
+position = Vector2( -20, 0 )
 rotation = 1.5708
 scale = Vector2( 0.349931, 0.349931 )
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat"]
-visible = false
-position = Vector2( 10.0905, 0 )
+position = Vector2( -22, 0 )
 scale = Vector2( 1, 0.3 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="PlayerBoat"]
-visible = false
-scale = Vector2( 1, 0.3 )
-texture = ExtResource( 1 )
-
 [node name="PinJoint2D" type="PinJoint2D" parent="PlayerBoat"]
-position = Vector2( 32, -6.10352e-05 )
 node_a = NodePath("../Sail")
 node_b = NodePath("..")
 bias = 0.9
 
 [node name="Sail" type="RigidBody2D" parent="PlayerBoat"]
-position = Vector2( -6.10352e-05, -6.10352e-05 )
+position = Vector2( -32, 0 )
 gravity_scale = 0.0
 angular_damp = 3.0
 script = ExtResource( 3 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat/Sail"]
+rotation = 3.14159
+shape = SubResource( 2 )
+
 [node name="Sail" type="Sprite" parent="PlayerBoat/Sail"]
-position = Vector2( 2.32166, 0 )
+position = Vector2( 2.35, 0 )
 rotation = 1.57079
 scale = Vector2( 0.118017, 0.118017 )
 texture = ExtResource( 4 )
 hframes = 3
 frame = 2
 
-[node name="Sprite" type="Sprite" parent="PlayerBoat/Sail"]
-visible = false
-modulate = Color( 1, 0, 0, 1 )
-rotation = 3.14159
-scale = Vector2( 1.02896, 0.18924 )
-texture = ExtResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat/Sail"]
-visible = false
-position = Vector2( 2.40747, 0 )
-rotation = 3.14159
-shape = SubResource( 2 )
+[node name="Camera2D" type="Camera2D" parent="PlayerBoat"]
+position = Vector2( -31.9266, 0 )
+current = true
+smoothing_enabled = true
+smoothing_speed = 1.0
 
 [node name="Wind" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.423529 )
+position = Vector2( -500, -400 )
 rotation = -0.785398
 amount = 80
 lifetime = 5.0
-preprocess = 5.0
-visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+preprocess = 50.0
+visibility_rect = Rect2( -550, 0, 1200, 1200 )
+local_coords = false
+draw_order = 1
 process_material = SubResource( 3 )
 texture = ExtResource( 6 )
 script = ExtResource( 8 )
 
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.0509804, 0.466667, 0.607843, 1 )
-show_behind_parent = true
-position = Vector2( 72.7062, 68.1621 )
-scale = Vector2( 20, 10 )
-texture = ExtResource( 1 )
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="WindSpeed" type="Label" parent="."]
-margin_left = -443.653
-margin_top = 330.785
-margin_right = -363.653
-margin_bottom = 344.785
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1075.2, 646.8 )
+
+[node name="Ocean" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.71, 0.913, 1, 1 )
+scale = Vector2( 2.1, 2.1 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="WindSpeed" type="Label" parent="GUI"]
+margin_left = 13.6893
+margin_top = 554.656
+margin_right = 93.6893
+margin_bottom = 568.656
 text = "WindSpeed: "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BoatSpeed" type="Label" parent="."]
-margin_left = -443.653
-margin_top = 344.785
-margin_right = -363.653
-margin_bottom = 358.785
+[node name="BoatSpeed" type="Label" parent="GUI"]
+margin_left = 13.6893
+margin_top = 568.656
+margin_right = 93.6893
+margin_bottom = 582.656
 text = "Boat Speed: "
 __meta__ = {
 "_edit_use_anchors_": false

@@ -6,7 +6,7 @@ extends RigidBody2D
 # var b = "text"
 
 var movespeed = 500
-var angularvelocity = 0.05
+var angularvelocity = 0.02
 var angle = 0
 var motorEnabled = 0
 
@@ -24,7 +24,7 @@ func _integrate_forces(state):
 	var angle = 0
 	if Input.is_action_pressed("left"):
 		angle += -1
-	if Input.is_action_pressed("right"):
+	elif Input.is_action_pressed("right"):
 		angle += 1
 	
 	if motorEnabled:
@@ -41,8 +41,13 @@ func _integrate_forces(state):
 	#the body of the ship pushes against the water to keep down sideways motion
 	self.linear_velocity -= (self.linear_velocity.dot(normal)*normal)*0.9
 	#print("LinearVelocity: ", self.linear_velocity.length())
-	var boatlabel=get_node("../BoatSpeed")
+	var boatlabel=get_node("/root/World/GUI/BoatSpeed")
 	boatlabel.text="Boat speed: " + str(round(self.linear_velocity.length()))
 	
 	#control the body of the ship by rotating it
-	state.set_angular_velocity(angle * angularvelocity / state.get_step() * (0.05 + self.linear_velocity.length()/200))
+	#do not allow rotating the body if not by user
+	if (angle != 0):
+		state.set_angular_velocity(angle * angularvelocity / state.get_step() \
+									* (0.05 + self.linear_velocity.length()/200))
+	else:
+		state.set_angular_velocity(0)
