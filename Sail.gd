@@ -61,7 +61,9 @@ func _integrate_forces(state):
 	#get the wind speed relative to the sail
 	var parent=get_node("..")
 	var Gwindspeed=get_node("/root/World").windspeed
-	var wind = Gwindspeed - (parent.linear_velocity+self.linear_velocity)
+	#var wind = Gwindspeed - (parent.linear_velocity+self.linear_velocity)
+	var wind = Gwindspeed - self.linear_velocity
+	#print("Global wind: ", Gwindspeed, "\tlocal wind: ", wind, "\tParent V: ", parent.linear_velocity, "\tSelf: ", self.linear_velocity)
 	#The sail excertes a push perpendicular to its surface
 	windForce = (wind.dot(normal))*(normal)*forceCoefficient
 	self.applied_force = windForce

@@ -18,19 +18,19 @@ height = 9.64355
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.8383, 6.46887 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0.181818 ), 0.0, 0.891057, 0, 0, Vector2( 1, 1 ), 1.05067, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=10]
-curve = SubResource( 9 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=7]
 flag_disable_z = true
 direction = Vector3( 1, 1, 0 )
 spread = 0.0
@@ -39,10 +39,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = -90.0
 scale = 0.5
-scale_curve = SubResource( 10 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 800, 800, 1 )
 direction = Vector3( 0, 1, 0 )
@@ -52,15 +52,15 @@ initial_velocity = 424.0
 scale = 10.0
 scale_random = 1.0
 
-[sub_resource type="OpenSimplexNoise" id=5]
+[sub_resource type="OpenSimplexNoise" id=9]
 
-[sub_resource type="NoiseTexture" id=6]
+[sub_resource type="NoiseTexture" id=10]
 width = 10
 height = 10
 seamless = true
 as_normalmap = true
 bump_strength = 15.5
-noise = SubResource( 5 )
+noise = SubResource( 9 )
 
 [node name="World" type="Node2D"]
 position = Vector2( 450.319, 237.071 )
@@ -119,7 +119,7 @@ z_index = -1
 amount = 10
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 11 )
+process_material = SubResource( 7 )
 texture = ExtResource( 1 )
 script = ExtResource( 10 )
 
@@ -132,7 +132,7 @@ lifetime = 5.0
 preprocess = 50.0
 visibility_rect = Rect2( -550, 0, 1200, 1200 )
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 8 )
 texture = ExtResource( 6 )
 script = ExtResource( 8 )
 
@@ -145,7 +145,7 @@ motion_mirroring = Vector2( 1075.2, 646.8 )
 modulate = Color( 0.71, 0.913, 1, 1 )
 scale = Vector2( 2.1, 2.1 )
 texture = ExtResource( 9 )
-normal_map = SubResource( 6 )
+normal_map = SubResource( 10 )
 centered = false
 
 [node name="GUI" type="CanvasLayer" parent="."]
