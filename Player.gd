@@ -55,6 +55,6 @@ func _integrate_forces(state):
 	#Apply the windforce on when the line is taut
 	#print($Sail.lineTaut)
 	if ($Sail.lineTaut):
-		self.applied_force = $Sail.windForce * 20
+		self.applied_force = $Sail.windForce * 10
 	else:
 		self.applied_force = Vector2(0, 0)
