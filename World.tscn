@@ -10,7 +10,7 @@
 [ext_resource path="res://Wind.gd" type="Script" id=8]
 [ext_resource path="res://Art/Ocean/seamless.png" type="Texture" id=9]
 [ext_resource path="res://Wake.gd" type="Script" id=10]
-[ext_resource path="res://Water.shader" type="Shader" id=11]
+[ext_resource path="res://WaterHSV.shader" type="Shader" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -20,7 +20,7 @@ height = 9.64355
 extents = Vector2( 31.8383, 6.46887 )
 
 [sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 1, 1, 0.498039, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 0.784314, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=4]
 gradient = SubResource( 3 )
@@ -92,7 +92,7 @@ noise = SubResource( 15 )
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 11 )
 shader_param/speed = 0.05
-shader_param/tint = Color( 0.0291, 0.515232, 0.97, 1 )
+shader_param/tint = Color( 0.07, 0.5195, 1, 1 )
 shader_param/noise_img1 = SubResource( 12 )
 shader_param/noise_img2 = SubResource( 14 )
 shader_param/noise_img3 = SubResource( 16 )
