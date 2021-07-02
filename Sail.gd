@@ -5,7 +5,7 @@ extends RigidBody2D
 var maxangle=30
 var tightenpersec=45
 var forceCoefficient=10
-var windForce
+var windForce = Vector2(0, 0)
 var lineTaut
 var tautLimit = 0.999
 

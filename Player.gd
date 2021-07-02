@@ -10,6 +10,10 @@ var angularvelocity = 0.02
 var angle = 0
 var motorEnabled = 0
 
+var zoomMax = 1.5
+var zoomMin = 0.5
+var zoomStep = 0.01
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#set_global_position(get_viewport().size/3)
@@ -18,6 +22,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#Handle camera zoom
+	var zoomVal = $Camera2D.zoom[0]
+	if Input.is_action_just_released("zoomIn"):
+		zoomVal -= zoomStep*5
+	
+	if Input.is_action_pressed("zoomIn"):
+		zoomVal -= zoomStep
+	
+	if Input.is_action_just_released("zoomOut"):
+		zoomVal += zoomStep*5
+		
+	if Input.is_action_pressed("zoomOut"):
+		zoomVal += zoomStep
+	
+	zoomVal = clamp(zoomVal, zoomMin, zoomMax)
+	
+	$Camera2D.zoom = Vector2(zoomVal, zoomVal)
+	
+	#call draw function every iteration
 	update()
 	
 func _draw():
@@ -56,19 +79,19 @@ func _integrate_forces(state):
 	boatlabel.text="Boat speed: " + str(round(self.linear_velocity.length()))
 	
 	#control the body of the ship by rotating it
-	#do not allow rotating the body if not by user
 	if (angle != 0):
 		state.set_angular_velocity(angle * angularvelocity / state.get_step() \
 									* (0.05 + self.linear_velocity.length()/200))
-	else:
-		state.set_angular_velocity(0)
+
 		
 	#Apply the windforce on when the line is taut
-	#print($Sail.lineTaut)
-	if ($Sail.lineTaut):
-		#Only apply force if it is in the same direction as the boat (pushback fix)
-		if (facing.dot($Sail.windForce) >= 0):
-			self.applied_force = $Sail.windForce * 10
+	#Only apply force if it is in the same direction as the boat (pushback fix)
+	
+	var pushDirection = facing.dot($Sail.windForce)
+	var validDirection = pushDirection >= 0
+
+	if ($Sail.lineTaut and validDirection):
+		self.applied_force = $Sail.windForce * 10
 	else:
 		self.applied_force = Vector2(0, 0)
 

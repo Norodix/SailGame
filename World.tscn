@@ -71,8 +71,8 @@ noise = SubResource( 9 )
 octaves = 1
 
 [sub_resource type="NoiseTexture" id=12]
-width = 1280
-height = 1280
+width = 2560
+height = 2560
 seamless = true
 noise = SubResource( 11 )
 
@@ -81,8 +81,8 @@ seed = 5
 octaves = 1
 
 [sub_resource type="NoiseTexture" id=14]
-width = 1280
-height = 1280
+width = 2560
+height = 2560
 seamless = true
 noise = SubResource( 13 )
 
@@ -91,8 +91,8 @@ seed = 8
 octaves = 1
 
 [sub_resource type="NoiseTexture" id=16]
-width = 1280
-height = 1280
+width = 2560
+height = 2560
 seamless = true
 noise = SubResource( 15 )
 
@@ -108,7 +108,7 @@ shader_param/noise_img3 = SubResource( 16 )
 [sub_resource type="ImageTexture" id=18]
 flags = 23
 flags = 23
-size = Vector2( 1280, 1280 )
+size = Vector2( 2560, 2560 )
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 14 )
@@ -127,6 +127,7 @@ script = ExtResource( 7 )
 mass = 20.0
 can_sleep = false
 linear_damp = 0.5
+angular_damp = 20.0
 script = ExtResource( 2 )
 
 [node name="BoatBody" type="Sprite" parent="PlayerBoat"]
@@ -195,7 +196,7 @@ script = ExtResource( 8 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1280, 1280 )
+motion_mirroring = Vector2( 2560, 2560 )
 
 [node name="Ocean" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 visible = false
@@ -207,7 +208,7 @@ centered = false
 
 [node name="ShaderOcean" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 material = SubResource( 17 )
-position = Vector2( 384.711, 276.134 )
+position = Vector2( 1280, 1280 )
 texture = SubResource( 18 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
