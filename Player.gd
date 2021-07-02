@@ -17,8 +17,19 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	update()
+	
+func _draw():
+	var crate = get_node("../CrateArea")
+	var crateDirection = crate.global_position - self.global_position
+	crateDirection=crateDirection.normalized().rotated(-self.global_rotation)
+	#crateDirection=crateDirection.rotated(-self.global_rotation)
+	var start = crateDirection*100
+	var end   = crateDirection*120
+	draw_line(start, end, Color(1, 0, 0), 3, true)
+	pass
+
 
 func _integrate_forces(state):
 	var angle = 0
@@ -41,7 +52,7 @@ func _integrate_forces(state):
 	#the body of the ship pushes against the water to keep down sideways motion
 	self.linear_velocity -= (self.linear_velocity.dot(normal)*normal)*0.9
 	#print("LinearVelocity: ", self.linear_velocity.length())
-	var boatlabel=get_node("/root/World/GUI/BoatSpeed")
+	var boatlabel=get_node("/root/World/GUI/Control/BoatSpeed")
 	boatlabel.text="Boat speed: " + str(round(self.linear_velocity.length()))
 	
 	#control the body of the ship by rotating it
@@ -55,6 +66,9 @@ func _integrate_forces(state):
 	#Apply the windforce on when the line is taut
 	#print($Sail.lineTaut)
 	if ($Sail.lineTaut):
-		self.applied_force = $Sail.windForce * 10
+		#Only apply force if it is in the same direction as the boat (pushback fix)
+		if (facing.dot($Sail.windForce) >= 0):
+			self.applied_force = $Sail.windForce * 10
 	else:
 		self.applied_force = Vector2(0, 0)
+

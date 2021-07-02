@@ -1,0 +1,28 @@
+extends Area2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+var maxRadius = 2000
+var minRadius = 500
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+signal pickUp
+
+func _on_CrateArea_body_entered(body):
+	var boat = get_node("../PlayerBoat")
+	if(body == boat):
+		self.emit_signal("pickUp")
+		var r=rand_range(minRadius, maxRadius)
+		var angle = randf()*2*PI
+		self.position += Vector2(cos(angle)*r, sin(angle)*r)
+

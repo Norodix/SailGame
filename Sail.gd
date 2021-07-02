@@ -7,7 +7,7 @@ var tightenpersec=45
 var forceCoefficient=10
 var windForce
 var lineTaut
-var tautLimit = 1#0.999
+var tautLimit = 0.999
 
 
 
@@ -68,6 +68,6 @@ func _integrate_forces(state):
 	#The sail excertes a push perpendicular to its surface
 	windForce = (wind.dot(normal))*(normal)*forceCoefficient
 	self.applied_force = windForce
-	var windlabel=get_node("/root/World/GUI/WindSpeed")
+	var windlabel=get_node("/root/World/GUI/Control/WindSpeed")
 	windlabel.text="Wind speed: " + str(round(wind.length()))
 	#print("Wind speed: ", wind.length())
