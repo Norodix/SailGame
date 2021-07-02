@@ -10,7 +10,7 @@
 [ext_resource path="res://Wind.gd" type="Script" id=8]
 [ext_resource path="res://Art/Ocean/seamless.png" type="Texture" id=9]
 [ext_resource path="res://Wake.gd" type="Script" id=10]
-[ext_resource path="res://WaterHSV.shader" type="Shader" id=11]
+[ext_resource path="res://WaterRidged.shader" type="Shader" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -64,6 +64,7 @@ bump_strength = 15.5
 noise = SubResource( 9 )
 
 [sub_resource type="OpenSimplexNoise" id=11]
+octaves = 1
 
 [sub_resource type="NoiseTexture" id=12]
 width = 1280
@@ -73,6 +74,7 @@ noise = SubResource( 11 )
 
 [sub_resource type="OpenSimplexNoise" id=13]
 seed = 5
+octaves = 1
 
 [sub_resource type="NoiseTexture" id=14]
 width = 1280
@@ -82,6 +84,7 @@ noise = SubResource( 13 )
 
 [sub_resource type="OpenSimplexNoise" id=15]
 seed = 8
+octaves = 1
 
 [sub_resource type="NoiseTexture" id=16]
 width = 1280
@@ -91,7 +94,8 @@ noise = SubResource( 15 )
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 11 )
-shader_param/speed = 0.05
+shader_param/speed = 0.03
+shader_param/strength = 0.5
 shader_param/tint = Color( 0.07, 0.5195, 1, 1 )
 shader_param/noise_img1 = SubResource( 12 )
 shader_param/noise_img2 = SubResource( 14 )
