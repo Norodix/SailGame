@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1493"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="UnCoil.svg"
+   inkscape:export-filename="/home/bence/Documents/SailGame/Art/UnCoil.png"
+   inkscape:export-xdpi="14.608702"
+   inkscape:export-ydpi="14.608702">
+  <defs
+     id="defs1487" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="421.23856"
+     inkscape:cy="714.51318"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g2088"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:snap-nodes="true" />
+  <metadata
+     id="metadata1490">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g2084">
+      <g
+         id="g2088">
+        <g
+           id="g3838"
+           inkscape:export-xdpi="44.046806"
+           inkscape:export-ydpi="44.046806">
+          <path
+             id="path2079"
+             style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+             d="m 113.67607,160.77438 c 0,1.87034 -2.52118,0.92276 -3.10863,0 -1.59194,-2.50062 0.70014,-5.45061 3.10863,-6.21726 4.30824,-1.37134 8.45413,2.10919 9.32589,6.21727 1.27934,6.02876 -3.52454,11.5112 -9.3259,12.43451 -7.73229,1.23063 -14.588965,-4.94045 -15.543136,-12.43453 -1.200727,-9.43053 6.356216,-17.677 15.543156,-18.65176 11.12662,-1.18057 20.77092,7.77181 21.7604,18.65179 0.93555,10.28696 -5.66362,19.9254 -15.25132,23.44636 -10.16703,4.08751 -3.85119,20.99164 10.4454,12.16739"
+             sodipodi:nodetypes="cssssssscc" />
+          <path
+             id="rect2058"
+             style="fill:none;stroke:#000000;stroke-width:4.56499;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+             d="m 128.97579,202.06602 1.65477,-5.67787 -5.30176,-2.62065"
+             sodipodi:nodetypes="ccc" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
