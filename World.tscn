@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Art/wake_circle.svg" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Art/crate.png" type="Texture" id=13]
 [ext_resource path="res://Rocking.shader" type="Shader" id=14]
 [ext_resource path="res://CrateArea.gd" type="Script" id=15]
+[ext_resource path="res://Art/arrow.svg" type="Texture" id=16]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -119,6 +120,9 @@ shader_param/vertical = null
 [sub_resource type="CircleShape2D" id=20]
 radius = 15.0
 
+[sub_resource type="CircleShape2D" id=21]
+radius = 35.0
+
 [node name="World" type="Node2D"]
 position = Vector2( 450.319, 237.071 )
 script = ExtResource( 7 )
@@ -150,7 +154,9 @@ bias = 0.9
 [node name="Sail" type="RigidBody2D" parent="PlayerBoat"]
 position = Vector2( -32, 0 )
 gravity_scale = 0.0
-angular_damp = 0.0
+can_sleep = false
+linear_damp = 0.5
+angular_damp = 0.02
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat/Sail"]
@@ -274,4 +280,34 @@ region_rect = Rect2( -246.803, -44.2639, 1505.93, 1262.26 )
 visible = false
 shape = SubResource( 20 )
 one_way_collision_margin = 0.0
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+
+[node name="VisibilityNode" type="Node2D" parent="TouchControls"]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="TouchControls/VisibilityNode"]
+position = Vector2( 40, 417.976 )
+shape = SubResource( 21 )
+shape_centered = false
+action = "tighten"
+visibility_mode = 1
+
+[node name="Sprite" type="Sprite" parent="TouchControls/VisibilityNode/TouchScreenButton"]
+position = Vector2( 0, 3 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 16 )
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="TouchControls/VisibilityNode"]
+position = Vector2( 40, 510.003 )
+shape = SubResource( 21 )
+shape_centered = false
+action = "loosen"
+visibility_mode = 1
+
+[node name="Sprite" type="Sprite" parent="TouchControls/VisibilityNode/TouchScreenButton2"]
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 16 )
+flip_v = true
+
+[node name="TouchDirection" type="Node2D" parent="TouchControls/VisibilityNode"]
 [connection signal="body_entered" from="CrateArea" to="CrateArea" method="_on_CrateArea_body_entered"]

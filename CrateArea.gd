@@ -4,8 +4,8 @@ extends Area2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var maxRadius = 2000
-var minRadius = 500
+var maxRadius = 5000
+var minRadius = 1000
 
 
 # Called when the node enters the scene tree for the first time.

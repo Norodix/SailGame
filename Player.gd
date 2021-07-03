@@ -14,6 +14,10 @@ var zoomMax = 1.5
 var zoomMin = 0.5
 var zoomStep = 0.01
 
+#Variables that store steering data
+var turnLeft = 0
+var turnRight = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#set_global_position(get_viewport().size/3)
@@ -22,26 +26,62 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#call draw function every iteration
+	update()
+	
 	#Handle camera zoom
 	var zoomVal = $Camera2D.zoom[0]
-	if Input.is_action_just_released("zoomIn"):
-		zoomVal -= zoomStep*5
-	
+#	if Input.is_action_just_released("zoomIn"):
+#		zoomVal -= zoomStep*5
 	if Input.is_action_pressed("zoomIn"):
 		zoomVal -= zoomStep
-	
-	if Input.is_action_just_released("zoomOut"):
-		zoomVal += zoomStep*5
-		
+	#if Input.is_action_just_released("zoomOut"):
+#		zoomVal += zoomStep*5
 	if Input.is_action_pressed("zoomOut"):
 		zoomVal += zoomStep
 	
 	zoomVal = clamp(zoomVal, zoomMin, zoomMax)
 	
 	$Camera2D.zoom = Vector2(zoomVal, zoomVal)
+
+
+	#Steer with key events
+	if Input.is_action_pressed("left"):
+		turnLeft = true
+	else:
+		turnLeft = false
 	
-	#call draw function every iteration
-	update()
+	if Input.is_action_pressed("right"):
+		turnRight = true
+	else:
+		turnRight = false
+
+	#Steer the ship if mouse is pressed somewhere
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+		#Mouse pressed is the same in case of touchscreen
+		var facing=Vector2(cos(global_rotation), sin(global_rotation))
+		var leftFacing = facing.rotated(deg2rad(-90))
+		
+		var mousePosition = get_viewport().get_mouse_position()
+		var selfPosition = get_global_transform_with_canvas().origin
+		var mouseRelativePosition = mousePosition - selfPosition
+		
+		#if too close to player, do not parse
+		if ( mouseRelativePosition.length() > 20 and mouseRelativePosition.length() < 300 ):
+			# if left direction and mouse relative to player are in the same direction, turn left
+			var sameDirection = mouseRelativePosition.normalized().dot(leftFacing.normalized())
+			var limit = 0.1
+			if(sameDirection > limit):
+				turnLeft = true
+				#go left
+				pass
+			if(sameDirection < -limit):
+				turnRight = true
+				#go right
+				pass
+		
+
+
 	
 func _draw():
 	var crate = get_node("../CrateArea")
@@ -56,9 +96,9 @@ func _draw():
 
 func _integrate_forces(state):
 	var angle = 0
-	if Input.is_action_pressed("left"):
+	if turnLeft:
 		angle += -1
-	elif Input.is_action_pressed("right"):
+	if turnRight:
 		angle += 1
 	
 	if motorEnabled:
