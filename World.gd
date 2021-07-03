@@ -5,6 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 var windspeed=Vector2(50, 50)*3
+var crateCount = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,3 +21,9 @@ func _process(delta):
 
 
 
+
+
+func _on_CrateArea_pickUp():
+	crateCount += 1
+	$GUI/Control/CrateCounter.play("SizeBump")
+	$GUI/Control/CrateCounter/Node2D/Label.text = "x " + var2str(crateCount)

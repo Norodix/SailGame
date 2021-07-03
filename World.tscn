@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Art/wake_circle.svg" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -112,6 +112,34 @@ shader_param/noise_img3 = SubResource( 16 )
 flags = 23
 flags = 23
 size = Vector2( 2560, 2560 )
+
+[sub_resource type="Animation" id=23]
+resource_name = "SizeBump"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("CrateCounter/Node2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.7, 1.7 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CrateCounter/Node2D:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 12.0, 0.0 ]
+}
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 14 )
@@ -238,6 +266,7 @@ margin_left = 13.6893
 margin_top = 554.656
 margin_right = 93.6893
 margin_bottom = 568.656
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "WindSpeed: "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -248,10 +277,40 @@ margin_left = 13.6893
 margin_top = 568.656
 margin_right = 93.6893
 margin_bottom = 582.656
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Boat Speed: "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CrateCounter" type="AnimationPlayer" parent="GUI/Control"]
+playback_speed = 3.0
+anims/SizeBump = SubResource( 23 )
+
+[node name="Node2D" type="Node2D" parent="GUI/Control/CrateCounter"]
+position = Vector2( 951.18, 48.86 )
+
+[node name="Label" type="Label" parent="GUI/Control/CrateCounter/Node2D"]
+anchor_top = 0.031
+anchor_right = 0.03
+anchor_bottom = 0.076
+margin_left = 7.47949
+margin_top = -5.14
+margin_right = 47.4796
+margin_bottom = 8.86001
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "x 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="GUI/Control/CrateCounter/Node2D"]
+position = Vector2( -24.5215, -0.140015 )
+scale = Vector2( 0.04, 0.04 )
+texture = ExtResource( 13 )
 
 [node name="DebugOverlay" type="CanvasLayer" parent="."]
 script = ExtResource( 12 )
@@ -322,3 +381,4 @@ flip_v = true
 
 [node name="TouchDirection" type="Node2D" parent="TouchControls/TouchControlsVisibilityNode"]
 [connection signal="body_entered" from="CrateArea" to="CrateArea" method="_on_CrateArea_body_entered"]
+[connection signal="pickUp" from="CrateArea" to="." method="_on_CrateArea_pickUp"]

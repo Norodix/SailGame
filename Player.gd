@@ -135,3 +135,7 @@ func _integrate_forces(state):
 	else:
 		self.applied_force = Vector2(0, 0)
 
+
+
+func _on_CrateArea_pickUp():
+	pass # Replace with function body.
