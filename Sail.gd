@@ -69,5 +69,5 @@ func _integrate_forces(state):
 	windForce = (wind.dot(normal))*(normal)*forceCoefficient
 	self.applied_force = windForce
 	var windlabel=get_node("/root/World/GUI/Control/WindSpeed")
-	windlabel.text="Wind speed: " + str(round(wind.length()))
+	windlabel.text="Apparent wind speed: " + str(round(wind.length()))
 	#print("Wind speed: ", wind.length())

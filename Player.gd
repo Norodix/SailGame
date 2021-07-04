@@ -81,16 +81,33 @@ func _process(delta):
 				pass
 		
 
-
+func drawArrow(start: Vector2, end: Vector2, color: Color, lineWidth: float):
+	draw_line(start, end, color, lineWidth, true)
+	#Create the two spokes of the arrow
+	var arrowAngle = (end-start).angle()
+	var spokeLength = (start-end).length()/4
+	var spoke1Start = Vector2(0, 0).rotated(arrowAngle) + end
+	var spoke2Start = spoke1Start
+	var spoke1End = Vector2(-spokeLength, -spokeLength).rotated(arrowAngle) + end
+	var spoke2End = Vector2(-spokeLength, spokeLength).rotated(arrowAngle) + end
+	draw_line(spoke1Start, spoke1End, color, lineWidth, true)
+	draw_line(spoke2Start, spoke2End, color, lineWidth, true)
+	draw_circle(end, lineWidth/2.0, color)
+	pass
 	
 func _draw():
+	#Draw indicator arrow
+	var arrowLineWidth = 3.0
+	var arrowColor = Color(1, 0, 0)
 	var crate = get_node("../CrateArea")
 	var crateDirection = crate.global_position - self.global_position
 	crateDirection=crateDirection.normalized().rotated(-self.global_rotation)
 	#crateDirection=crateDirection.rotated(-self.global_rotation)
 	var start = crateDirection*100
 	var end   = crateDirection*120
-	draw_line(start, end, Color(1, 0, 0), 3, true)
+	drawArrow(start, end, arrowColor, arrowLineWidth)
+	#drawArrow(start, end+(end-start)*2, Color(0, 1, 1), arrowLineWidth)
+	
 	pass
 
 

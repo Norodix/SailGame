@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Art/wake_circle.svg" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Art/arrow.svg" type="Texture" id=16]
 [ext_resource path="res://Art/Coil.png" type="Texture" id=17]
 [ext_resource path="res://Art/UnCoil.png" type="Texture" id=18]
+[ext_resource path="res://theme.theme" type="Theme" id=19]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -150,6 +151,8 @@ shader_param/vertical = null
 [sub_resource type="CircleShape2D" id=21]
 radius = 15.0
 
+[sub_resource type="Theme" id=26]
+
 [sub_resource type="CapsuleShape2D" id=22]
 radius = 36.0
 height = 10.0
@@ -165,7 +168,7 @@ script = ExtResource( 7 )
 [node name="PlayerBoat" type="RigidBody2D" parent="."]
 mass = 20.0
 can_sleep = false
-linear_damp = 0.5
+linear_damp = 0.4
 angular_damp = 20.0
 script = ExtResource( 2 )
 
@@ -257,28 +260,29 @@ texture = SubResource( 18 )
 [node name="Control" type="Control" parent="GUI"]
 margin_right = 40.0
 margin_bottom = 40.0
+theme = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="WindSpeed" type="Label" parent="GUI/Control"]
-margin_left = 13.6893
-margin_top = 554.656
-margin_right = 93.6893
-margin_bottom = 568.656
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+margin_left = 13.6
+margin_top = 547.254
+margin_right = 148.6
+margin_bottom = 570.254
 text = "WindSpeed: "
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BoatSpeed" type="Label" parent="GUI/Control"]
-margin_left = 13.6893
-margin_top = 568.656
-margin_right = 93.6893
-margin_bottom = 582.656
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+margin_left = 13.6
+margin_top = 570.254
+margin_right = 124.6
+margin_bottom = 589.254
 text = "Boat Speed: "
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -294,13 +298,11 @@ position = Vector2( 951.18, 48.86 )
 anchor_top = 0.031
 anchor_right = 0.03
 anchor_bottom = 0.076
-margin_left = 7.47949
-margin_top = -5.14
-margin_right = 47.4796
-margin_bottom = 8.86001
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+margin_left = 6.02282
+margin_top = -13.0296
+margin_right = 46.0229
+margin_bottom = 9.97037
+theme = ExtResource( 19 )
 text = "x 0"
 valign = 1
 __meta__ = {
@@ -349,7 +351,13 @@ one_way_collision_margin = 0.0
 
 [node name="TouchControls" type="CanvasLayer" parent="."]
 
-[node name="TouchControlsVisibilityNode" type="Node2D" parent="TouchControls"]
+[node name="TouchControlsVisibilityNode" type="Control" parent="TouchControls"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = SubResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
 position = Vector2( 40, 320.907 )
