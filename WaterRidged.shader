@@ -50,6 +50,7 @@ void fragment(){
 	float multiplier = noise_r * noise_g * noise_b;
 	float newMultiplier = strength * (multiplier*multiplier*multiplier*multiplier);
 	//newMultiplier = multiplier;
+	//newMultiplier = step(0.35, newMultiplier);
 	vec3 white = vec3(1, 1, 1);
 	
 	vec3 tint_hsb = rgb2hsb(tint.rgb);

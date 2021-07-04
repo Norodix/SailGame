@@ -10,7 +10,7 @@
 [ext_resource path="res://Wind.gd" type="Script" id=8]
 [ext_resource path="res://Art/Ocean/seamless.png" type="Texture" id=9]
 [ext_resource path="res://Wake.gd" type="Script" id=10]
-[ext_resource path="res://WaterRidged.shader" type="Shader" id=11]
+[ext_resource path="res://WaterRidgedNormal.shader" type="Shader" id=11]
 [ext_resource path="res://DebugOverlay.gd" type="Script" id=12]
 [ext_resource path="res://Art/crate.png" type="Texture" id=13]
 [ext_resource path="res://Rocking.shader" type="Shader" id=14]
@@ -113,7 +113,7 @@ flags = 23
 flags = 23
 size = Vector2( 2560, 2560 )
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=19]
 resource_name = "SizeBump"
 step = 0.01
 tracks/0/type = "value"
@@ -141,20 +141,20 @@ tracks/1/keys = {
 "values": [ 0.0, 12.0, 0.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=19]
+[sub_resource type="ShaderMaterial" id=20]
 shader = ExtResource( 14 )
 shader_param/speed = 6.0
 shader_param/amplitude = 0.2
 shader_param/vertical = null
 
-[sub_resource type="CircleShape2D" id=20]
+[sub_resource type="CircleShape2D" id=21]
 radius = 15.0
 
-[sub_resource type="CapsuleShape2D" id=21]
+[sub_resource type="CapsuleShape2D" id=22]
 radius = 36.0
 height = 10.0
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="CapsuleShape2D" id=23]
 radius = 38.0
 height = 38.0
 
@@ -285,7 +285,7 @@ __meta__ = {
 
 [node name="CrateCounter" type="AnimationPlayer" parent="GUI/Control"]
 playback_speed = 3.0
-anims/SizeBump = SubResource( 23 )
+anims/SizeBump = SubResource( 19 )
 
 [node name="Node2D" type="Node2D" parent="GUI/Control/CrateCounter"]
 position = Vector2( 951.18, 48.86 )
@@ -337,14 +337,14 @@ position = Vector2( 785.388, 0 )
 script = ExtResource( 15 )
 
 [node name="Sprite" type="Sprite" parent="CrateArea"]
-material = SubResource( 19 )
+material = SubResource( 20 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 13 )
 region_rect = Rect2( -246.803, -44.2639, 1505.93, 1262.26 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrateArea"]
 visible = false
-shape = SubResource( 20 )
+shape = SubResource( 21 )
 one_way_collision_margin = 0.0
 
 [node name="TouchControls" type="CanvasLayer" parent="."]
@@ -355,7 +355,7 @@ one_way_collision_margin = 0.0
 position = Vector2( 40, 320.907 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 17 )
-shape = SubResource( 21 )
+shape = SubResource( 22 )
 action = "tighten"
 visibility_mode = 1
 
@@ -369,7 +369,7 @@ texture = ExtResource( 16 )
 position = Vector2( 40, 416.152 )
 normal = ExtResource( 18 )
 pressed = ExtResource( 18 )
-shape = SubResource( 22 )
+shape = SubResource( 23 )
 action = "loosen"
 visibility_mode = 1
 
