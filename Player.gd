@@ -70,7 +70,7 @@ func _process(delta):
 		if ( mouseRelativePosition.length() > 20 and mouseRelativePosition.length() < 300 ):
 			# if left direction and mouse relative to player are in the same direction, turn left
 			var sameDirection = mouseRelativePosition.normalized().dot(leftFacing.normalized())
-			var limit = 0.1
+			var limit = 0.05
 			if(sameDirection > limit):
 				turnLeft = true
 				#go left
