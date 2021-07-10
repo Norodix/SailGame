@@ -171,14 +171,14 @@ radius = 15.0
 
 [sub_resource type="Theme" id=22]
 
-[sub_resource type="CircleShape2D" id=25]
+[sub_resource type="CircleShape2D" id=23]
 radius = 100.0
 
-[sub_resource type="CapsuleShape2D" id=23]
+[sub_resource type="CapsuleShape2D" id=24]
 radius = 36.0
 height = 10.0
 
-[sub_resource type="CapsuleShape2D" id=24]
+[sub_resource type="CapsuleShape2D" id=25]
 radius = 38.0
 height = 38.0
 
@@ -333,11 +333,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CrateCounter" type="AnimationPlayer" parent="GUI/Control"]
+[node name="CrateCounter" type="AnimationPlayer" parent="GUI"]
 playback_speed = 3.0
 anims/SizeBump = SubResource( 19 )
 
-[node name="Control" type="Control" parent="GUI/Control/CrateCounter"]
+[node name="Control" type="Control" parent="GUI/CrateCounter"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 0.306
@@ -348,9 +348,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Node2D" type="Node2D" parent="GUI/Control/CrateCounter/Control"]
+[node name="Node2D" type="Node2D" parent="GUI/CrateCounter/Control"]
 
-[node name="Label" type="Label" parent="GUI/Control/CrateCounter/Control/Node2D"]
+[node name="Label" type="Label" parent="GUI/CrateCounter/Control/Node2D"]
 margin_right = 25.0
 margin_bottom = 19.0
 theme = ExtResource( 19 )
@@ -360,7 +360,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="GUI/Control/CrateCounter/Control/Node2D"]
+[node name="Sprite" type="Sprite" parent="GUI/CrateCounter/Control/Node2D"]
 position = Vector2( -30, 10.201 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 13 )
@@ -419,7 +419,7 @@ position = Vector2( 16, 16 )
 scale = Vector2( 0.237091, 0.237091 )
 normal = ExtResource( 26 )
 pressed = ExtResource( 26 )
-shape = SubResource( 25 )
+shape = SubResource( 23 )
 action = "Reset"
 visibility_mode = 1
 
@@ -441,7 +441,7 @@ __meta__ = {
 position = Vector2( 16, 0 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 17 )
-shape = SubResource( 23 )
+shape = SubResource( 24 )
 action = "tighten"
 visibility_mode = 1
 
@@ -455,7 +455,7 @@ texture = ExtResource( 16 )
 position = Vector2( 16, 100 )
 normal = ExtResource( 18 )
 pressed = ExtResource( 18 )
-shape = SubResource( 24 )
+shape = SubResource( 25 )
 action = "loosen"
 visibility_mode = 1
 
