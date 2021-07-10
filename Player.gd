@@ -22,6 +22,12 @@ var turnRight = 0
 func _ready():
 	#set_global_position(get_viewport().size/3)
 	pass # Replace with function body.
+	
+#helper function for mapping a->b range to c->d
+func map(a, b, c, d, v):
+	v = clamp(v, a, b)
+	return (v-a)/(b-a) * (d-c) + c
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,6 +85,20 @@ func _process(delta):
 				turnRight = true
 				#go right
 				pass
+				
+	#Apply wind sound based on relative windspeed
+	var Gwindspeed=get_node("/root/World").windspeed
+	var wind = (Gwindspeed - self.linear_velocity).length()
+	#var windDB = map(0, 400, -23, -5, wind)
+	var windPitch = map(0, 400, 1, 6, wind)
+	#$Wind.volume_db = windDB
+	$Wind.pitch_scale = windPitch
+	
+	#Apply wave sound based on world speed
+	var waveDB = map(0, 400, -27, -10, self.linear_velocity.length())
+	$Waves.volume_db = waveDB
+	print("waveDB: ", waveDB);
+
 		
 
 func drawArrow(start: Vector2, end: Vector2, color: Color, lineWidth: float):
@@ -118,7 +138,7 @@ func _integrate_forces(state):
 	if turnRight:
 		angle += 1
 	
-	if motorEnabled:
+	if motorEnabled: #obsolete
 		if Input.is_action_pressed("up"):
 			self.applied_force = Vector2(1000, 0).rotated(self.rotation)
 		elif Input.is_action_pressed("down"):
@@ -140,7 +160,7 @@ func _integrate_forces(state):
 		state.set_angular_velocity(angle * angularvelocity / state.get_step() \
 									* (0.05 + self.linear_velocity.length()/200))
 
-		
+	
 	#Apply the windforce on when the line is taut
 	#Only apply force if it is in the same direction as the boat (pushback fix)
 	

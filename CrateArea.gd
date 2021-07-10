@@ -25,4 +25,6 @@ func _on_CrateArea_body_entered(body):
 		var r=rand_range(minRadius, maxRadius)
 		var angle = randf()*2*PI
 		self.position += Vector2(cos(angle)*r, sin(angle)*r)
+	
+	$Break.play()
 

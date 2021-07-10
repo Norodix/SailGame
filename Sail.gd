@@ -55,6 +55,9 @@ func _integrate_forces(state):
 		lineTaut=false
 	
 	$Sail.frame=framenum
+	$RopeCreak.stream_paused = not(lineTaut)
+	
+		
 	
 	#calculate the normal for the sail
 	var facing=Vector2(cos(global_rotation), sin(global_rotation))

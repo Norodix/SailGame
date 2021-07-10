@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/gronnie__wooden-box-breaking-sound-effects.wav-450631037bd7780dbec9cc2e7e7f8313.sample"
+
+[deps]
+
+source_file="res://Sounds/gronnie__wooden-box-breaking-sound-effects.wav"
+dest_files=[ "res://.import/gronnie__wooden-box-breaking-sound-effects.wav-450631037bd7780dbec9cc2e7e7f8313.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
