@@ -76,12 +76,12 @@ func _process(delta):
 		if ( mouseRelativePosition.length() > 20):
 			# if left direction and mouse relative to player are in the same direction, turn left
 			var sameDirection = mouseRelativePosition.normalized().dot(leftFacing.normalized())
-			var limit = 0.05
-			if(sameDirection > limit):
+			var tolerance = 0.05
+			if(sameDirection > tolerance):
 				turnLeft = true
 				#go left
 				pass
-			if(sameDirection < -limit):
+			if(sameDirection < -tolerance):
 				turnRight = true
 				#go right
 				pass
@@ -96,8 +96,10 @@ func _process(delta):
 	
 	#Apply wave sound based on world speed
 	var waveDB = map(0, 400, -27, -10, self.linear_velocity.length())
+	var wavePitch = map(0, 400, 0.9, 1.5, self.linear_velocity.length())
 	$Waves.volume_db = waveDB
-	print("waveDB: ", waveDB);
+	$Waves.pitch_scale = wavePitch
+	#print("waveDB: ", waveDB);
 
 
 

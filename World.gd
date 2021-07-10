@@ -26,4 +26,4 @@ func _process(delta):
 func _on_CrateArea_pickUp():
 	crateCount += 1
 	$GUI/Control/CrateCounter.play("SizeBump")
-	$GUI/Control/CrateCounter/Node2D/Label.text = "x " + var2str(crateCount)
+	$GUI/Control/CrateCounter/Control/Node2D/Label.text = "x " + var2str(crateCount)

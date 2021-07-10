@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/codefhd__saildeploy_trimmed.wav-18e0d7b7b8b043eef3d7cb87bf143094.sample"
+
+[deps]
+
+source_file="res://Sounds/codefhd__saildeploy_trimmed.wav"
+dest_files=[ "res://.import/codefhd__saildeploy_trimmed.wav-18e0d7b7b8b043eef3d7cb87bf143094.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

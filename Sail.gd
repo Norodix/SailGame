@@ -7,6 +7,8 @@ var tightenpersec=45
 var forceCoefficient=10
 var windForce = Vector2(0, 0)
 var lineTaut
+var looseCounter = 0
+var wind #relative wind speed
 var tautLimit = 0.999
 
 
@@ -15,6 +17,11 @@ var tautLimit = 0.999
 func _ready():
 	pass # Replace with function body.
 
+#helper function for mapping a->b range to c->d
+func map(a, b, c, d, v):
+	v = clamp(v, a, b)
+	return (v-a)/(b-a) * (d-c) + c
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,6 +35,21 @@ func _process(delta):
 		if (maxangle>90):
 			maxangle=90
 	
+
+	$RopeCreak.stream_paused = not(lineTaut)
+	if(lineTaut and looseCounter > 0.7):
+		var deployVolume = map(0, 400, -10, 0, wind.length())
+		print(deployVolume)
+		$SailDeploy.volume_db = deployVolume
+		$SailDeploy.play()
+	if not lineTaut:
+		$SailDeploy.stop()
+	
+	if lineTaut:
+		looseCounter=0
+	else:
+		looseCounter += delta
+	
 	
 func _integrate_forces(state):
 	#Limit the angle of the sail to the specified value
@@ -36,6 +58,7 @@ func _integrate_forces(state):
 	var pinX = get_node("../PinJoint2D").position.x #should be 32
 	#print(pinX)
 	var parent=get_node("..")
+	
 	
 	if (self.rotation_degrees > maxangle * tautLimit):
 		self.rotation_degrees = maxangle
@@ -55,9 +78,7 @@ func _integrate_forces(state):
 		lineTaut=false
 	
 	$Sail.frame=framenum
-	$RopeCreak.stream_paused = not(lineTaut)
-	
-		
+
 	
 	#calculate the normal for the sail
 	var facing=Vector2(cos(global_rotation), sin(global_rotation))
@@ -66,7 +87,7 @@ func _integrate_forces(state):
 	#get the wind speed relative to the sail
 	var Gwindspeed=get_node("/root/World").windspeed
 	#var wind = Gwindspeed - (parent.linear_velocity+self.linear_velocity)
-	var wind = Gwindspeed - self.linear_velocity
+	wind = Gwindspeed - self.linear_velocity
 	#print("Global wind: ", Gwindspeed, "\tlocal wind: ", wind, "\tParent V: ", parent.linear_velocity, "\tSelf: ", self.linear_velocity)
 	#The sail excertes a push perpendicular to its surface
 	windForce = (wind.dot(normal))*(normal)*forceCoefficient
