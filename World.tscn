@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Art/wake_circle.svg" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://Sounds/lydmakeren__boat-waves-2.wav" type="AudioStream" id=23]
 [ext_resource path="res://Sounds/mario1298__weak-wind_trimmed.wav" type="AudioStream" id=24]
 [ext_resource path="res://Sounds/6polnic__hamp-rope-creaks.wav" type="AudioStream" id=25]
+[ext_resource path="res://Art/reset.png" type="Texture" id=26]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -169,6 +170,9 @@ radius = 15.0
 
 [sub_resource type="Theme" id=22]
 
+[sub_resource type="CircleShape2D" id=25]
+radius = 100.0
+
 [sub_resource type="CapsuleShape2D" id=23]
 radius = 36.0
 height = 10.0
@@ -176,6 +180,9 @@ height = 10.0
 [sub_resource type="CapsuleShape2D" id=24]
 radius = 38.0
 height = 38.0
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 462, 300 )
 
 [node name="World" type="Node2D"]
 position = Vector2( 450.319, 237.071 )
@@ -399,35 +406,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
-position = Vector2( 40, 320.907 )
+[node name="RestButton" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
+position = Vector2( 16, 16 )
+scale = Vector2( 0.237091, 0.237091 )
+normal = ExtResource( 26 )
+pressed = ExtResource( 26 )
+shape = SubResource( 25 )
+action = "Reset"
+visibility_mode = 1
+
+[node name="Sprite" type="Sprite" parent="TouchControls/TouchControlsVisibilityNode/RestButton"]
+visible = false
+scale = Vector2( 0.4, 0.4 )
+flip_v = true
+
+[node name="TightenButton" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
+position = Vector2( 16, 320.907 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 17 )
 shape = SubResource( 23 )
 action = "tighten"
 visibility_mode = 1
 
-[node name="Sprite" type="Sprite" parent="TouchControls/TouchControlsVisibilityNode/TouchScreenButton"]
+[node name="Sprite" type="Sprite" parent="TouchControls/TouchControlsVisibilityNode/TightenButton"]
 visible = false
 position = Vector2( 0, 3 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 16 )
 
-[node name="TouchScreenButton2" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
-position = Vector2( 40, 416.152 )
+[node name="LoosenButton" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
+position = Vector2( 16, 416.152 )
 normal = ExtResource( 18 )
 pressed = ExtResource( 18 )
 shape = SubResource( 24 )
 action = "loosen"
 visibility_mode = 1
 
-[node name="Sprite" type="Sprite" parent="TouchControls/TouchControlsVisibilityNode/TouchScreenButton2"]
+[node name="Sprite" type="Sprite" parent="TouchControls/TouchControlsVisibilityNode/LoosenButton"]
 visible = false
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 16 )
 flip_v = true
 
-[node name="TouchDirection" type="Node2D" parent="TouchControls/TouchControlsVisibilityNode"]
+[node name="Steer" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
+position = Vector2( 100, 0 )
+z_index = -1
+shape = SubResource( 26 )
+action = "MouseSteer"
 
 [node name="Light2D" type="Light2D" parent="."]
 visible = false

@@ -63,7 +63,7 @@ func _process(delta):
 		turnRight = false
 
 	#Steer the ship if mouse is pressed somewhere
-	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+	if Input.is_action_pressed("MouseSteer"):
 		#Mouse pressed is the same in case of touchscreen
 		var facing=Vector2(cos(global_rotation), sin(global_rotation))
 		var leftFacing = facing.rotated(deg2rad(-90))
@@ -73,7 +73,7 @@ func _process(delta):
 		var mouseRelativePosition = mousePosition - selfPosition
 		
 		#if too close to player, do not parse
-		if ( mouseRelativePosition.length() > 20 and mouseRelativePosition.length() < 300 ):
+		if ( mouseRelativePosition.length() > 20):
 			# if left direction and mouse relative to player are in the same direction, turn left
 			var sameDirection = mouseRelativePosition.normalized().dot(leftFacing.normalized())
 			var limit = 0.05
@@ -99,7 +99,7 @@ func _process(delta):
 	$Waves.volume_db = waveDB
 	print("waveDB: ", waveDB);
 
-		
+
 
 func drawArrow(start: Vector2, end: Vector2, color: Color, lineWidth: float):
 	draw_line(start, end, color, lineWidth, true)
