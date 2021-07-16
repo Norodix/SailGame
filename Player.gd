@@ -100,6 +100,10 @@ func _process(delta):
 	$Waves.volume_db = waveDB
 	$Waves.pitch_scale = wavePitch
 	#print("waveDB: ", waveDB);
+	
+	#Make the wake brighter as the ship is traveling faster
+	var waveModColor = map(0, 400, 0, 0.6, self.linear_velocity.length())
+	$Wake.modulate = Color(waveModColor, waveModColor, waveModColor)
 
 
 

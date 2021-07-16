@@ -13,9 +13,26 @@
    version="1.1"
    id="svg1140"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="wake_circle.svg">
+   sodipodi:docname="wake_circle.svg"
+   inkscape:export-filename="/home/bence/Documents/SailGame/Art/wake_circle.png"
+   inkscape:export-xdpi="65.019997"
+   inkscape:export-ydpi="65.019997">
   <defs
-     id="defs1134" />
+     id="defs1134">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1297"
+       x="-0.108"
+       width="1.216"
+       y="-0.108"
+       height="1.216">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="4.05"
+         id="feGaussianBlur1299" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,8 +41,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="199.49314"
-     inkscape:cy="82.453304"
+     inkscape:cx="95.945602"
+     inkscape:cy="200.99836"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -53,11 +70,13 @@
      inkscape:groupmode="layer"
      id="layer1">
     <circle
-       style="fill:none;stroke:#ffffff;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#ffffff;stroke-width:4.64719;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter1297)"
        id="path1703"
        cx="50"
        cy="-50"
        r="45"
-       transform="scale(1,-1)" />
+       transform="matrix(0.8822531,0,0,-0.8822531,5.887345,5.8873454)"
+       inkscape:export-xdpi="65.919998"
+       inkscape:export-ydpi="65.919998" />
   </g>
 </svg>

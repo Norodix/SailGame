@@ -15,8 +15,8 @@
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="crate.svg"
    inkscape:export-filename="/home/bence/Documents/SailGame/Art/crate.png"
-   inkscape:export-xdpi="300"
-   inkscape:export-ydpi="300">
+   inkscape:export-xdpi="64.894218"
+   inkscape:export-ydpi="64.894218">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="470.73948"
-     inkscape:cy="464.19364"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="87.256652"
+     inkscape:cy="715.16343"
      inkscape:document-units="mm"
      inkscape:current-layer="g899"
      inkscape:document-rotation="0"
@@ -55,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -72,8 +72,9 @@
          id="g1050"
          transform="rotate(60,86.60254,100)"
          style="stroke:#2f1900;stroke-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128">
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png">
         <path
            style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#2f1900;fill-opacity:1;stroke:#2f1900;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#2f1900;stop-opacity:1"
            d="m 86.60254,100 43.30127,25 43.30127,-25 -43.30127,-25 -43.30127,25"
@@ -87,48 +88,55 @@
          style="font-variation-settings:normal;vector-effect:none;fill:#2f1900;fill-opacity:1;stroke:#2f1900;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#2f1900"
          d="m 86.60254,100 43.30127,25 43.30127,-25 -43.30127,-25 -43.30127,25"
          id="path839"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128" />
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png" />
       <path
          style="font-variation-settings:normal;vector-effect:none;fill:#c87137;fill-opacity:1;stroke:#2f1900;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#2f1900"
          d="M 95.262797,100 129.90381,120.00001 164.54483,100 129.90381,79.999999 95.262797,100"
          id="path857"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128" />
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png" />
       <path
          style="font-variation-settings:normal;vector-effect:none;fill:#2f1900;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:0.4, 0.4;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
          d="m 101.32498,99.5 5.19615,3 27.71281,-16 -5.19615,-3 z"
          id="path870"
          sodipodi:nodetypes="ccccc"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128" />
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png" />
       <path
          style="font-variation-settings:normal;vector-effect:none;fill:#2f1900;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:0.4, 0.4;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
          d="m 109.1192,104 5.19615,3 27.71281,-16 -5.19615,-3 z"
          id="path872"
          sodipodi:nodetypes="ccccc"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128" />
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png" />
       <path
          style="font-variation-settings:normal;vector-effect:none;fill:#2f1900;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:0.4, 0.4;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
          d="m 116.91343,108.5 5.19615,3 27.71281,-16 -5.19615,-3 z"
          id="path874"
          sodipodi:nodetypes="ccccc"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128" />
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png" />
       <path
          style="font-variation-settings:normal;vector-effect:none;fill:#2f1900;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:0.4, 0.4;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
          d="m 124.70766,113 5.19615,3 27.71281,-16 -5.19615,-3 z"
          id="path876"
          sodipodi:nodetypes="ccccc"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128" />
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png" />
       <g
          id="g1070"
          transform="rotate(-60,173.20508,100)"
          style="stroke:#2f1900;stroke-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128">
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png">
         <path
            style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#2f1900;fill-opacity:1;stroke:#2f1900;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#2f1900;stop-opacity:1"
            d="m 86.60254,100 43.30127,25 43.30127,-25 -43.30127,-25 -43.30127,25"
@@ -140,8 +148,9 @@
       </g>
       <g
          id="g900"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128">
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png">
         <path
            style="fill:#2f1900;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            d="m 93.530742,113 v 32 l 5.196152,3 v -32 z"
@@ -162,8 +171,9 @@
       <g
          id="g910"
          transform="matrix(-1,0,0,1,259.80762,0)"
-         inkscape:export-xdpi="128"
-         inkscape:export-ydpi="128">
+         inkscape:export-xdpi="129.78844"
+         inkscape:export-ydpi="129.78844"
+         inkscape:export-filename="/home/bence/crate.png">
         <path
            style="fill:#2f1900;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            d="m 93.530742,113 v 32 l 5.196152,3 v -32 z"

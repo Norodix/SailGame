@@ -25,5 +25,5 @@ void vertex() {
 	float rotation_ang = sin(TIME*speed);
 	//rotation_ang=rotation_ang*rotation_ang*rotation_ang;
 	float rotation = rotation_ang*amplitude;
-	VERTEX = rotateUV(VERTEX, vec2(0, 0.3)/TEXTURE_PIXEL_SIZE, rotation);
+	VERTEX = rotateUV(VERTEX, vec2(0, vertical)/TEXTURE_PIXEL_SIZE, rotation);
 }
