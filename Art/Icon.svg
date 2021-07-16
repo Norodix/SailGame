@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 50 50"
+   version="1.1"
+   id="svg2159"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="Icon.svg"
+   inkscape:export-filename="/home/bence/Documents/SailGame/Icon.png"
+   inkscape:export-xdpi="260.09601"
+   inkscape:export-ydpi="260.09601">
+  <defs
+     id="defs2153">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#pattern2892"
+       id="pattern2901"
+       patternTransform="matrix(0.13882797,0.08015238,-0.01204982,0.02087091,10.319574,30.615792)" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="12.790408"
+       height="274.35224"
+       patternTransform="translate(352.32632,684.79392)"
+       id="pattern2892">
+      <g
+         id="g2890"
+         transform="matrix(3.7795276,0,0,3.7795276,-352.32632,-684.79392)">
+        <rect
+           style="fill:#803300;fill-opacity:1;stroke:none"
+           transform="scale(0.26458333)"
+           width="6.3952079"
+           height="274.35223"
+           x="352.32632"
+           y="684.79395"
+           id="rect2882" />
+        <rect
+           style="fill:#803300;fill-opacity:0;stroke:none;stroke-width:0.264583"
+           width="1.6920654"
+           height="72.589027"
+           x="94.911736"
+           y="181.18506"
+           id="rect2886" />
+      </g>
+    </pattern>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="40.911597"
+     inkscape:cy="90.778352"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer2"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:snap-global="true"
+     inkscape:snap-center="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     showguides="false" />
+  <metadata
+     id="metadata2156">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bg"
+     style="display:none">
+    <rect
+       style="fill:#00b6d5;fill-opacity:1;stroke:none;stroke-width:0.865;stroke-linecap:round;stroke-linejoin:round"
+       id="rect849"
+       width="50"
+       height="50"
+       x="0"
+       y="0"
+       inkscape:export-filename="/home/bence/Documents/SailGame/Icon_bg.png"
+       inkscape:export-xdpi="260"
+       inkscape:export-ydpi="260" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <path
+       id="path2903"
+       style="display:inline;fill:#c87137;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 32.964652,12.946893 c -1.582852,0.589482 -5.435671,1.573166 -8.886927,6.674056 -3.451247,5.100889 -5.735866,10.527603 -8.165365,16.02987 0.456188,1.246487 1.188977,1.978863 2.398502,2.677181 1.209528,0.698323 2.210177,0.966748 3.517766,0.738578 3.550354,-4.855141 7.107895,-9.546932 9.799771,-15.086246 2.691869,-5.539323 1.617172,-9.367909 1.336253,-11.033439 z"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="path2905"
+       style="display:inline;fill:url(#pattern2901);fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 33.15112,12.623938 c -1.623132,0.604483 -5.574008,1.613202 -9.113088,6.843906 -3.539079,5.230701 -5.881844,10.795518 -8.373168,16.437812 0.467802,1.278211 1.219238,2.029223 2.459543,2.745313 1.24031,0.716094 2.266278,0.991181 3.607146,0.757206 3.640705,-4.978702 7.288931,-9.789723 10.049312,-15.470004 2.760368,-5.680293 1.658324,-9.606317 1.370255,-11.314233 z"
+       sodipodi:nodetypes="cscscsc"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <path
+       id="path2901"
+       style="display:inline;fill:#522100;fill-opacity:1;stroke:none;stroke-width:0.300675px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 34.665876,10 C 32.795882,10.636444 28.230859,11.663134 24.265479,17.471017 20.300097,23.278903 17.735329,29.498381 15,35.801223 c 0.580505,1.457384 1.475677,2.327267 2.938332,3.171732 1.462661,0.844468 2.6638,1.18489 4.216189,0.958932 C 26.245279,34.411603 30.349336,29.080834 33.396423,22.742769 36.443502,16.404707 35.049703,11.937687 34.665876,10 Z m -1.701091,2.946896 c 0.28092,1.665531 1.355499,5.494017 -1.336369,11.033339 -2.691875,5.539313 -6.249533,10.231156 -9.799886,15.086298 -1.307588,0.228169 -2.308011,-0.04021 -3.51754,-0.738519 -1.209524,-0.69832 -1.942378,-1.43066 -2.398567,-2.677147 2.429499,-5.502267 4.714147,-10.929084 8.165396,-16.029972 3.451254,-5.100888 7.304115,-6.084516 8.886966,-6.673999 z"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
+    <g
+       id="g2944"
+       inkscape:export-filename="/home/bence/GameDev/Sailor/Art/sails.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       transform="matrix(0.47820593,-0.10581022,0.10581022,0.47820593,-73.191567,-59.717888)"
+       style="display:inline;stroke-width:2.04176"
+       inkscape:transform-center-x="-1.792927"
+       inkscape:transform-center-y="10.464936">
+      <path
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.581193px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+         d="m 229.03963,181.76506 -1.75375,0.34177 c 0,0 5.94318,24.50924 -3.95133,44.28822 l 3.79673,-4.36259 c 9.95971,-19.90932 1.90835,-40.2674 1.90835,-40.2674 z"
+         id="path2907"
+         sodipodi:nodetypes="ccccc"
+         inkscape:transform-center-x="0.44431863"
+         inkscape:transform-center-y="22.147511"
+         transform="translate(-55.625066,18.075724)" />
+      <circle
+         style="opacity:1;fill:#4d4d4d;fill-opacity:1;stroke:#000000;stroke-width:1.02088;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="circle2909"
+         cx="228.16275"
+         cy="181.93594"
+         r="1.7183566"
+         inkscape:transform-center-x="0.0054225148"
+         inkscape:transform-center-y="0.0034029506"
+         transform="translate(-55.625066,18.075724)" />
+    </g>
+  </g>
+</svg>

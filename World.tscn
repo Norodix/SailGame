@@ -49,7 +49,7 @@ gradient = SubResource( 4 )
 
 [sub_resource type="Curve" id=6]
 max_value = 2.0
-_data = [ Vector2( 0, 0.172727 ), 0.0, 1.16054, 0, 0, Vector2( 1, 2 ), 0.697455, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.313636 ), 0.0, 1.16054, 0, 0, Vector2( 1, 2 ), 0.697455, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=7]
 curve = SubResource( 6 )

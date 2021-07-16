@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Sailor"
 run/main_scene="res://World.tscn"
-config/icon="res://icon.png"
+config/icon="res://Icon.png"
 
 [display]
 
