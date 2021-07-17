@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Art/wake_circle.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -30,6 +30,8 @@
 [ext_resource path="res://Art/Anchor.png" type="Texture" id=28]
 [ext_resource path="res://Art/Wheel.png" type="Texture" id=29]
 [ext_resource path="res://Art/Lantern.png" type="Texture" id=30]
+[ext_resource path="res://Sounds/michael-grinnell__metallic-clunk.wav" type="AudioStream" id=31]
+[ext_resource path="res://Sounds/cmusounddesign__jf-glass-breaking.wav" type="AudioStream" id=32]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -425,9 +427,18 @@ region_rect = Rect2( -246.803, -44.2639, 1505.93, 1262.26 )
 shape = SubResource( 22 )
 one_way_collision_margin = 0.0
 
-[node name="Break" type="AudioStreamPlayer" parent="CrateArea"]
+[node name="Break_wood" type="AudioStreamPlayer" parent="CrateArea"]
 stream = ExtResource( 22 )
 volume_db = -15.0
+pitch_scale = 2.0
+
+[node name="Break_glass" type="AudioStreamPlayer" parent="CrateArea"]
+stream = ExtResource( 32 )
+volume_db = -12.0
+
+[node name="Break_metal" type="AudioStreamPlayer" parent="CrateArea"]
+stream = ExtResource( 31 )
+volume_db = -8.0
 pitch_scale = 2.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CrateArea"]
