@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sounds/ispeakwaves__wonderful-calm-beautiful-piano-loop.wav" type="AudioStream" id=1]
+
+[node name="BackgroundMusic" type="Node"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true

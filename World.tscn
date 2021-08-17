@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Art/wake_circle.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -20,7 +20,6 @@
 [ext_resource path="res://Art/UnCoil.png" type="Texture" id=18]
 [ext_resource path="res://theme.theme" type="Theme" id=19]
 [ext_resource path="res://Art/LightRadial.png" type="Texture" id=20]
-[ext_resource path="res://Sounds/ispeakwaves__wonderful-calm-beautiful-piano-loop.wav" type="AudioStream" id=21]
 [ext_resource path="res://Sounds/gronnie__wooden-box-breaking-sound-effects.wav" type="AudioStream" id=22]
 [ext_resource path="res://Sounds/lydmakeren__boat-waves-2_trimmed.wav" type="AudioStream" id=23]
 [ext_resource path="res://Sounds/mario1298__weak-wind_trimmed.wav" type="AudioStream" id=24]
@@ -420,7 +419,6 @@ script = ExtResource( 15 )
 visible = false
 material = SubResource( 21 )
 scale = Vector2( 0.08, 0.08 )
-texture = ExtResource( 13 )
 region_rect = Rect2( -246.803, -44.2639, 1505.93, 1262.26 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrateArea"]
@@ -521,9 +519,5 @@ position = Vector2( -410.319, 505.745 )
 texture = ExtResource( 20 )
 texture_scale = 15.44
 range_layer_min = -100
-
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 21 )
-autoplay = true
 [connection signal="body_entered" from="CrateArea" to="CrateArea" method="_on_CrateArea_body_entered"]
 [connection signal="pickUp" from="CrateArea" to="." method="_on_CrateArea_pickUp"]
