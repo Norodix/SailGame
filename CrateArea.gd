@@ -16,10 +16,13 @@ func _ready():
 	frameCount = $AnimatedSprite.frames.get_frame_count("default")
 	$AnimatedSprite.frame = randi() % frameCount
 	
-	sounds = [$Break_wood, \
-			$Break_wood, \
-			$Break_metal, \
-			$Break_glass]
+	sounds = [$Break_wood, 	#crate
+			$Break_wood, 	#wheel
+			$Break_metal, 	#anchorn
+			$Break_glass, 	#lantern
+			$Break_glass, 	#compass
+			$Break_copper	#Sextant
+			]
 	
 	pass # Replace with function body.
 

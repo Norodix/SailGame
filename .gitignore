@@ -6,3 +6,9 @@ bin/
 build/
 lib/
 Exports/
+
+LinuxExport*
+WinExport*
+android/
+androidExport/
+Export/
