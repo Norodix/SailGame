@@ -82,16 +82,6 @@ size_flags_vertical = 3
 margin_top = 489.0
 margin_right = 944.0
 margin_bottom = 520.0
-hint_tooltip = "6polnic
-cmusounddesign
-codefhd
-gronnie
-ispeakwaves
-littleluigi
-lydmakeren
-mario1298
-michael-grinnell
-"
 custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
 text = "Return"
 flat = true
