@@ -279,61 +279,61 @@ shader_param/color_value = Color( 1, 1, 1, 1 )
 shader_param/trail_divisor = 1
 shader_param/gravity = Vector3( 0, -1e-06, 0 )
 
-[sub_resource type="OpenSimplexNoise" id=21]
+[sub_resource type="OpenSimplexNoise" id=11]
 
-[sub_resource type="NoiseTexture" id=22]
+[sub_resource type="NoiseTexture" id=12]
 width = 10
 height = 10
 seamless = true
 as_normalmap = true
 bump_strength = 15.5
-noise = SubResource( 21 )
+noise = SubResource( 11 )
 
-[sub_resource type="OpenSimplexNoise" id=23]
+[sub_resource type="OpenSimplexNoise" id=13]
 octaves = 1
 period = 32.0
 
-[sub_resource type="NoiseTexture" id=24]
+[sub_resource type="NoiseTexture" id=14]
 width = 1280
 height = 1280
 seamless = true
-noise = SubResource( 23 )
+noise = SubResource( 13 )
 
-[sub_resource type="OpenSimplexNoise" id=25]
+[sub_resource type="OpenSimplexNoise" id=15]
 seed = 5
 octaves = 1
 period = 32.0
 
-[sub_resource type="NoiseTexture" id=26]
+[sub_resource type="NoiseTexture" id=16]
 width = 1280
 height = 1280
 seamless = true
-noise = SubResource( 25 )
+noise = SubResource( 15 )
 
-[sub_resource type="OpenSimplexNoise" id=27]
+[sub_resource type="OpenSimplexNoise" id=17]
 seed = 8
 octaves = 1
 period = 32.0
 
-[sub_resource type="NoiseTexture" id=28]
+[sub_resource type="NoiseTexture" id=18]
 width = 1280
 height = 1280
 seamless = true
-noise = SubResource( 27 )
+noise = SubResource( 17 )
 
-[sub_resource type="ShaderMaterial" id=29]
+[sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 11 )
 shader_param/speed = 0.03
 shader_param/strength = 0.5
 shader_param/tint = Color( 0.07, 0.5195, 1, 1 )
-shader_param/noise_img1 = SubResource( 24 )
-shader_param/noise_img2 = SubResource( 26 )
-shader_param/noise_img3 = SubResource( 28 )
+shader_param/noise_img1 = SubResource( 14 )
+shader_param/noise_img2 = SubResource( 16 )
+shader_param/noise_img3 = SubResource( 18 )
 
-[sub_resource type="ImageTexture" id=30]
+[sub_resource type="ImageTexture" id=20]
 size = Vector2( 2560, 2560 )
 
-[sub_resource type="Shader" id=11]
+[sub_resource type="Shader" id=21]
 code = "shader_type canvas_item;
 uniform sampler2D sprite;
 
@@ -342,50 +342,50 @@ void fragment(){
 	COLOR.rgb = vec3(1.0);
 }"
 
-[sub_resource type="ImageTexture" id=12]
+[sub_resource type="ImageTexture" id=22]
 
-[sub_resource type="ShaderMaterial" id=13]
-shader = SubResource( 11 )
-shader_param/sprite = SubResource( 12 )
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 21 )
+shader_param/sprite = SubResource( 22 )
 
-[sub_resource type="ImageTexture" id=16]
+[sub_resource type="ImageTexture" id=24]
 flags = 0
 flags = 0
 size = Vector2( 2560, 2560 )
 
-[sub_resource type="OpenSimplexNoise" id=42]
+[sub_resource type="OpenSimplexNoise" id=25]
 octaves = 2
 period = 128.0
 
-[sub_resource type="NoiseTexture" id=43]
+[sub_resource type="NoiseTexture" id=26]
 seamless = true
-noise = SubResource( 42 )
+noise = SubResource( 25 )
 
-[sub_resource type="ShaderMaterial" id=41]
+[sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 38 )
 shader_param/overallVelocity = null
 shader_param/spawnDistance = 1280.0
 shader_param/spawnOrigin = Vector2( 1280, 1280 )
 shader_param/scale = 0.3
 shader_param/scale_random = 0.1
-shader_param/map = SubResource( 43 )
+shader_param/map = SubResource( 26 )
 
-[sub_resource type="OpenSimplexNoise" id=18]
+[sub_resource type="OpenSimplexNoise" id=28]
 octaves = 1
 period = 120.0
 
-[sub_resource type="NoiseTexture" id=19]
+[sub_resource type="NoiseTexture" id=29]
 seamless = true
-noise = SubResource( 18 )
+noise = SubResource( 28 )
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=30]
 shader = ExtResource( 38 )
 shader_param/overallVelocity = Vector3( 150, 150, 0 )
 shader_param/spawnDistance = 1280.0
 shader_param/spawnOrigin = Vector2( 1280, 1280 )
 shader_param/scale = 0.5
 shader_param/scale_random = 0.2
-shader_param/map = SubResource( 19 )
+shader_param/map = SubResource( 29 )
 
 [sub_resource type="Animation" id=31]
 step = 0.01
@@ -573,13 +573,13 @@ visible = false
 modulate = Color( 0.71, 0.913, 1, 1 )
 scale = Vector2( 2.1, 2.1 )
 texture = ExtResource( 9 )
-normal_map = SubResource( 22 )
+normal_map = SubResource( 12 )
 centered = false
 
 [node name="ShaderOcean" type="Sprite" parent="ParallaxBackground/ParallaxLayer_Ocean"]
-material = SubResource( 29 )
+material = SubResource( 19 )
 position = Vector2( 1280, 1280 )
-texture = SubResource( 30 )
+texture = SubResource( 20 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -592,7 +592,7 @@ z_index = 1000
 motion_mirroring = Vector2( 2560, 2560 )
 
 [node name="WindContainer" type="ViewportContainer" parent="ParallaxBackground2/ParallaxLayer_Wind"]
-material = SubResource( 13 )
+material = SubResource( 23 )
 margin_right = 5120.0
 margin_bottom = 5120.0
 script = ExtResource( 36 )
@@ -611,12 +611,12 @@ gui_disable_input = true
 [node name="Blending" type="Sprite" parent="ParallaxBackground2/ParallaxLayer_Wind/WindContainer/WindViewport"]
 process_priority = 2
 modulate = Color( 1, 1, 1, 0.0313726 )
-texture = SubResource( 16 )
+texture = SubResource( 24 )
 centered = false
 
 [node name="ShaderWind" type="Particles2D" parent="ParallaxBackground2/ParallaxLayer_Wind/WindContainer/WindViewport"]
 modulate = Color( 1, 1, 1, 0.0980392 )
-material = SubResource( 41 )
+material = SubResource( 27 )
 position = Vector2( -49.681, -162.929 )
 rotation = -0.785398
 amount = 50
@@ -625,7 +625,7 @@ preprocess = 50.0
 randomness = 0.5
 visibility_rect = Rect2( 0, 0, 2560, 2560 )
 local_coords = false
-process_material = SubResource( 20 )
+process_material = SubResource( 30 )
 texture = ExtResource( 35 )
 script = ExtResource( 37 )
 

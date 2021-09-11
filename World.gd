@@ -10,6 +10,7 @@ var crateCount = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	pass # Replace with function body.
 
 
@@ -17,6 +18,9 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("Reset"):
 		get_tree().reload_current_scene()
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene("res://Menu/TitleScreen.tscn")
 
 
 

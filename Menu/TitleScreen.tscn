@@ -1,0 +1,157 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://FreeSansBold.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Menu/TitleBackground.png" type="Texture" id=2]
+[ext_resource path="res://Menu/TitleScreen.gd" type="Script" id=3]
+[ext_resource path="res://Menu/TitleBackground.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="DynamicFont" id=5]
+size = 18
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" parent="." instance=ExtResource( 4 )]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = -40.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 944.0
+margin_bottom = 520.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 944.0
+margin_bottom = 520.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 199.0
+margin_bottom = 520.0
+theme = SubResource( 4 )
+custom_constants/separation = 8
+alignment = 1
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 199.0
+margin_bottom = 224.0
+focus_neighbour_top = NodePath("../Credits")
+focus_neighbour_bottom = NodePath("../Tutorial")
+custom_styles/focus = SubResource( 7 )
+custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+text = "Play"
+flat = true
+align = 0
+
+[node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 232.0
+margin_right = 199.0
+margin_bottom = 288.0
+focus_neighbour_top = NodePath("../Play")
+focus_neighbour_bottom = NodePath("../Credits")
+custom_styles/focus = SubResource( 8 )
+custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+text = "Tutorial"
+flat = true
+align = 0
+
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 296.0
+margin_right = 199.0
+margin_bottom = 352.0
+hint_tooltip = "6polnic
+cmusounddesign
+codefhd
+gronnie
+ispeakwaves
+littleluigi
+lydmakeren
+mario1298
+michael-grinnell
+"
+focus_neighbour_top = NodePath("../Tutorial")
+focus_neighbour_bottom = NodePath("../Play")
+custom_styles/focus = SubResource( 9 )
+custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+text = "Credits"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 520.0
+margin_right = 944.0
+margin_bottom = 520.0
+theme = SubResource( 6 )
+text = "Credits: 6polnic, cmusounddesign, codefhd, gronnie, ispeakwaves, littleluigi, lydmakeren, mario1298, michael-grinnell"
+scroll_active = false
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 439.0
+margin_right = 944.0
+margin_bottom = 520.0
+text = "Credits: 
+6polnic, cmusounddesign, codefhd, gronnie, ispeakwaves
+littleluigi, lydmakeren, mario1298, michael-grinnell"
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( -25, 0 )
+scale = Vector2( 0.56, 0.56 )
+z_index = -1
+texture = ExtResource( 2 )
+centered = false
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]

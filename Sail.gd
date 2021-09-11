@@ -39,7 +39,7 @@ func _process(delta):
 	$RopeCreak.stream_paused = not(lineTaut)
 	if(lineTaut and looseCounter > 0.7):
 		var deployVolume = map(0, 400, -10, 0, wind.length())
-		print(deployVolume)
+		#print(deployVolume)
 		$SailDeploy.volume_db = deployVolume
 		$SailDeploy.play()
 	if not lineTaut:

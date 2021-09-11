@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="210mm"
    height="297mm"
    viewBox="0 0 210 297"
    version="1.1"
    id="svg2435"
-   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
-   sodipodi:docname="SailAngle.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="SailAngle.svg">
+  <metadata
+     id="metadata975">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
   <sodipodi:namedview
      id="namedview2437"
      pagecolor="#ffffff"
@@ -31,19 +43,62 @@
      inkscape:snap-smooth-nodes="true"
      inkscape:snap-global="true"
      inkscape:snap-center="true"
-     inkscape:zoom="1.0464229"
-     inkscape:cx="585.32738"
-     inkscape:cy="853.86125"
+     inkscape:zoom="0.73993273"
+     inkscape:cx="344.31168"
+     inkscape:cy="899.18775"
      inkscape:window-width="1920"
-     inkscape:window-height="1006"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-height="1016"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:object-paths="true"
-     inkscape:object-nodes="true" />
+     inkscape:object-nodes="true"
+     inkscape:document-rotation="0" />
   <defs
      id="defs2432">
+    <marker
+       style="overflow:visible;"
+       id="marker1023"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;fill:#0000ff;stroke-width:0.625;stroke-linejoin:round;stroke:#0000ff;stroke-opacity:1;fill-opacity:1"
+         id="path1021" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker1013"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;fill:context-stroke;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1"
+         id="path1011" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker1003"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;fill:context-stroke;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1"
+         id="path1001" />
+    </marker>
     <marker
        style="overflow:visible;"
        id="Arrow2Mend"
@@ -51,7 +106,8 @@
        refY="0.0"
        orient="auto"
        inkscape:stockid="Arrow2Mend"
-       inkscape:isstock="true">
+       inkscape:isstock="true"
+       inkscape:collect="always">
       <path
          transform="scale(0.6) rotate(180) translate(0,0)"
          d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
@@ -137,7 +193,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1.6,0.8;stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.6, 0.8;stroke-dashoffset:0;stroke-opacity:1"
        d="M 129.71603,169.04896 H 91.801412"
        id="path32475" />
     <path
@@ -212,7 +268,7 @@
          transform="translate(-55.625066,18.075724)" />
     </g>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:4,1;stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1"
        d="m 32.956545,167.24011 58.844824,33.97407 44.837081,25.8867"
        id="path3009" />
     <path
@@ -243,7 +299,7 @@
        id="text19059"><tspan
          sodipodi:role="line"
          id="tspan19057"
-         style="fill:#00ff00;fill-opacity:1;stroke-width:0.3;stroke:none;stroke-miterlimit:4;stroke-dasharray:none"
+         style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none"
          x="101.51145"
          y="258.47336">Sail region</tspan></text>
     <path
@@ -274,7 +330,7 @@
        d="M 32.956545,219.97399 74.78945,244.12623"
        id="path31763" />
     <path
-       style="fill:none;stroke:#aa0000;stroke-width:1.30000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.30000001,1.30000001;stroke-opacity:1;marker-end:url(#Arrow2Mend);stroke-dashoffset:0"
+       style="fill:none;stroke:#aa0000;stroke-width:1.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.3, 1.3;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
        d="M 91.799514,182.74627 129.71603,169.04896"
        id="path32085" />
     <path
@@ -296,48 +352,48 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="250.49045"
-       y="214.85576"
+       x="103.21004"
+       y="282.03183"
        id="text39984"><tspan
          sodipodi:role="line"
          id="tspan39982"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0000ff;fill-opacity:1;stroke-width:0.264583"
-         x="250.49045"
-         y="214.85576">Apparent wind</tspan></text>
+         x="103.21004"
+         y="282.03183">Apparent wind</tspan></text>
     <path
        id="path44491"
-       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
-       d="m 239.08175,234.18013 h 41.83294"
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1003)"
+       d="m 91.80134,301.35619 h 41.83294"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
-       d="m 239.08175,234.18013 4e-5,-24.15225"
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1013)"
+       d="m 91.80134,301.35619 4e-5,-24.15225"
        id="path44607" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="238.98643"
-       y="247.10661"
+       x="91.706024"
+       y="314.28268"
        id="text45634"><tspan
          sodipodi:role="line"
          id="tspan45632"
          style="stroke-width:0.264583"
-         x="238.98643"
-         y="247.10661">True wind</tspan></text>
+         x="91.706024"
+         y="314.28268">True wind</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="175.7243"
-       y="230.41075"
+       x="28.443893"
+       y="297.58682"
        id="text46616"><tspan
          sodipodi:role="line"
          id="tspan46614"
          style="stroke-width:0.264583"
-         x="175.7243"
-         y="230.41075">Boat speed</tspan></text>
+         x="28.443893"
+         y="297.58682">Boat speed</tspan></text>
     <path
-       style="fill:#0000ff;stroke:#0000ff;stroke-width:1.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
-       d="m 239.08179,210.02789 41.8329,24.15224"
+       style="fill:#0000ff;stroke:#0000ff;stroke-width:1.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1023)"
+       d="m 91.80138,277.20395 41.8329,24.15224"
        id="path38902" />
   </g>
 </svg>
