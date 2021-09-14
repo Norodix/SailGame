@@ -3,7 +3,7 @@ uniform vec3 overallVelocity;
 uniform sampler2D map;
 uniform float spawnDistance;
 uniform vec2 spawnOrigin;
-uniform float screenSize = 2560; //This parameter is the size of the area where particles can move
+uniform float screenSize = 1280; //This parameter is the size of the area where particles can move
 uniform float wrapOffset = 20; //This parameter is added to screenSize to draw correctly at the edges of regions
 //Set all viewports and displays to the sum of screenSize and wrapOffset
 //Set parallaxmirroring to screenSize

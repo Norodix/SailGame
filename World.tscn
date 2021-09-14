@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Art/wake_circle.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -45,6 +45,40 @@ extents = Vector2( 31.8383, 6.46887 )
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 
+[sub_resource type="Shader" id=44]
+code = "shader_type particles;
+
+uniform float scale;
+uniform sampler2D scale_texture;
+
+uniform sampler2D color_ramp;
+
+void vertex() {
+	if (RESTART) {
+		CUSTOM.y = 0.0;
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	} else {
+		CUSTOM.y += DELTA / LIFETIME;
+	}
+	float tex_scale = textureLod(scale_texture, vec2(CUSTOM.y, 0.0), 0.0).r;
+	float base_scale = tex_scale * scale;
+	
+	COLOR = textureLod(color_ramp, vec2(CUSTOM.y, 0.0), 0.0);
+	TRANSFORM[0] = vec4(1.0, 0.0, 0.0, 0.0);
+	TRANSFORM[1] = vec4(0.0, 1.0, 0.0, 0.0);
+	TRANSFORM[2] = vec4(0.0, 0.0, 1.0, 0.0);
+	if (base_scale < 0.000001) {
+		base_scale = 0.000001;
+	}
+	TRANSFORM[0].xyz *= base_scale;
+	TRANSFORM[1].xyz *= base_scale;
+	TRANSFORM[2].xyz *= base_scale;
+	VELOCITY.z = 0.0;
+	TRANSFORM[3].z = 0.0;
+}
+
+"
+
 [sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 1, 1, 0.784314, 1, 1, 1, 0 )
 
@@ -58,6 +92,12 @@ _data = [ Vector2( 0, 0.313636 ), 0.0, 1.16054, 0, 0, Vector2( 1, 2 ), 0.697455,
 [sub_resource type="CurveTexture" id=7]
 curve = SubResource( 6 )
 
+[sub_resource type="ShaderMaterial" id=45]
+shader = SubResource( 44 )
+shader_param/scale = 0.5
+shader_param/scale_texture = SubResource( 7 )
+shader_param/color_ramp = SubResource( 5 )
+
 [sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 direction = Vector3( 1, 1, 0 )
@@ -70,9 +110,222 @@ scale = 0.5
 scale_curve = SubResource( 7 )
 color_ramp = SubResource( 5 )
 
+[sub_resource type="Shader" id=46]
+code = "shader_type particles;
+uniform vec3 direction;
+uniform float spread;
+uniform float flatness;
+uniform float initial_linear_velocity;
+uniform float initial_angle;
+uniform float angular_velocity;
+uniform float orbit_velocity;
+uniform float linear_accel;
+uniform float radial_accel;
+uniform float tangent_accel;
+uniform float damping;
+uniform float scale;
+uniform float hue_variation;
+uniform float anim_speed;
+uniform float anim_offset;
+uniform float initial_linear_velocity_random;
+uniform float initial_angle_random;
+uniform float angular_velocity_random;
+uniform float orbit_velocity_random;
+uniform float linear_accel_random;
+uniform float radial_accel_random;
+uniform float tangent_accel_random;
+uniform float damping_random;
+uniform float scale_random;
+uniform float hue_variation_random;
+uniform float anim_speed_random;
+uniform float anim_offset_random;
+uniform float lifetime_randomness;
+uniform vec4 color_value : hint_color;
+uniform int trail_divisor;
+uniform vec3 gravity;
+uniform sampler2D color_ramp;
+uniform sampler2D scale_texture;
+
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0)
+	s = 305420679;
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0)
+		s += 2147483647;
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+float rand_from_seed_m1_p1(inout uint seed) {
+	return rand_from_seed(seed) * 2.0 - 1.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+void vertex() {
+	uint base_number = NUMBER / uint(trail_divisor);
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	float angle_rand = rand_from_seed(alt_seed);
+	float scale_rand = rand_from_seed(alt_seed);
+	float hue_rot_rand = rand_from_seed(alt_seed);
+	float anim_offset_rand = rand_from_seed(alt_seed);
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+
+	bool restart = false;
+	if (CUSTOM.y > CUSTOM.w) {
+		restart = true;
+	}
+
+	if (RESTART || restart) {
+		float tex_linear_velocity = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_offset = 0.0;
+		float spread_rad = spread * degree_to_rad;
+		float angle1_rad = atan(direction.y, direction.x) + rand_from_seed_m1_p1(alt_seed) * spread_rad;
+		vec3 rot = vec3(cos(angle1_rad), sin(angle1_rad), 0.0);
+		VELOCITY = rot * initial_linear_velocity * mix(1.0, rand_from_seed(alt_seed), initial_linear_velocity_random);
+		float base_angle = (initial_angle + tex_angle) * mix(1.0, angle_rand, initial_angle_random);
+		CUSTOM.x = base_angle * degree_to_rad;
+		CUSTOM.y = 0.0;
+		CUSTOM.w = (1.0 - lifetime_randomness * rand_from_seed(alt_seed));
+		CUSTOM.z = (anim_offset + tex_anim_offset) * mix(1.0, anim_offset_rand, anim_offset_random);
+		VELOCITY = (EMISSION_TRANSFORM * vec4(VELOCITY, 0.0)).xyz;
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+		VELOCITY.z = 0.0;
+		TRANSFORM[3].z = 0.0;
+	} else {
+		CUSTOM.y += DELTA / LIFETIME;
+		float tex_linear_velocity = 0.0;
+		float tex_orbit_velocity = 0.0;
+		float tex_angular_velocity = 0.0;
+		float tex_linear_accel = 0.0;
+		float tex_radial_accel = 0.0;
+		float tex_tangent_accel = 0.0;
+		float tex_damping = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_speed = 0.0;
+		float tex_anim_offset = 0.0;
+		vec3 force = gravity;
+		vec3 pos = TRANSFORM[3].xyz;
+		pos.z = 0.0;
+		// apply linear acceleration
+		force += length(VELOCITY) > 0.0 ? normalize(VELOCITY) * (linear_accel + tex_linear_accel) * mix(1.0, rand_from_seed(alt_seed), linear_accel_random) : vec3(0.0);
+		// apply radial acceleration
+		vec3 org = EMISSION_TRANSFORM[3].xyz;
+		vec3 diff = pos - org;
+		force += length(diff) > 0.0 ? normalize(diff) * (radial_accel + tex_radial_accel) * mix(1.0, rand_from_seed(alt_seed), radial_accel_random) : vec3(0.0);
+		// apply tangential acceleration;
+		force += length(diff.yx) > 0.0 ? vec3(normalize(diff.yx * vec2(-1.0, 1.0)), 0.0) * ((tangent_accel + tex_tangent_accel) * mix(1.0, rand_from_seed(alt_seed), tangent_accel_random)) : vec3(0.0);
+		// apply attractor forces
+		VELOCITY += force * DELTA;
+		// orbit velocity
+		float orbit_amount = (orbit_velocity + tex_orbit_velocity) * mix(1.0, rand_from_seed(alt_seed), orbit_velocity_random);
+		if (orbit_amount != 0.0) {
+		     float ang = orbit_amount * DELTA * pi * 2.0;
+		     mat2 rot = mat2(vec2(cos(ang), -sin(ang)), vec2(sin(ang), cos(ang)));
+		     TRANSFORM[3].xy -= diff.xy;
+		     TRANSFORM[3].xy += rot * diff.xy;
+		}
+		if (damping + tex_damping > 0.0) {
+			float v = length(VELOCITY);
+			float damp = (damping + tex_damping) * mix(1.0, rand_from_seed(alt_seed), damping_random);
+			v -= damp * DELTA;
+			if (v < 0.0) {
+				VELOCITY = vec3(0.0);
+			} else {
+				VELOCITY = normalize(VELOCITY) * v;
+			}
+		}
+		float base_angle = (initial_angle + tex_angle) * mix(1.0, angle_rand, initial_angle_random);
+		base_angle += CUSTOM.y * LIFETIME * (angular_velocity + tex_angular_velocity) * mix(1.0, rand_from_seed(alt_seed) * 2.0 - 1.0, angular_velocity_random);
+		CUSTOM.x = base_angle * degree_to_rad;
+		CUSTOM.z = (anim_offset + tex_anim_offset) * mix(1.0, anim_offset_rand, anim_offset_random) + CUSTOM.y * (anim_speed + tex_anim_speed) * mix(1.0, rand_from_seed(alt_seed), anim_speed_random);
+	}
+	float tex_scale = textureLod(scale_texture, vec2(CUSTOM.y, 0.0), 0.0).r;
+	float tex_hue_variation = 0.0;
+	float hue_rot_angle = (hue_variation + tex_hue_variation) * pi * 2.0 * mix(1.0, hue_rot_rand * 2.0 - 1.0, hue_variation_random);
+	float hue_rot_c = cos(hue_rot_angle);
+	float hue_rot_s = sin(hue_rot_angle);
+	mat4 hue_rot_mat = mat4(vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.299, 0.587, 0.114, 0.0),
+			vec4(0.000, 0.000, 0.000, 1.0)) +
+		mat4(vec4(0.701, -0.587, -0.114, 0.0),
+			vec4(-0.299, 0.413, -0.114, 0.0),
+			vec4(-0.300, -0.588, 0.886, 0.0),
+			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_c +
+		mat4(vec4(0.168, 0.330, -0.497, 0.0),
+			vec4(-0.328, 0.035,  0.292, 0.0),
+			vec4(1.250, -1.050, -0.203, 0.0),
+			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_s;
+	COLOR = hue_rot_mat * textureLod(color_ramp, vec2(CUSTOM.y, 0.0), 0.0);
+
+	TRANSFORM[0] = vec4(cos(CUSTOM.x), -sin(CUSTOM.x), 0.0, 0.0);
+	TRANSFORM[1] = vec4(sin(CUSTOM.x), cos(CUSTOM.x), 0.0, 0.0);
+	TRANSFORM[2] = vec4(0.0, 0.0, 1.0, 0.0);
+	float base_scale = tex_scale * mix(scale, 1.0, scale_random * scale_rand);
+	if (base_scale < 0.000001) {
+		base_scale = 0.000001;
+	}
+	TRANSFORM[0].xyz *= base_scale;
+	TRANSFORM[1].xyz *= base_scale;
+	TRANSFORM[2].xyz *= base_scale;
+	VELOCITY.z = 0.0;
+	TRANSFORM[3].z = 0.0;
+	if (CUSTOM.y > CUSTOM.w) {		ACTIVE = false;
+	}
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id=47]
+shader = SubResource( 46 )
+shader_param/direction = Vector3( 1, 1, 0 )
+shader_param/spread = 0.0
+shader_param/flatness = 0.0
+shader_param/initial_linear_velocity = 0.0
+shader_param/initial_angle = -90.0
+shader_param/angular_velocity = 0.0
+shader_param/orbit_velocity = 0.0
+shader_param/linear_accel = 0.0
+shader_param/radial_accel = 0.0
+shader_param/tangent_accel = 0.0
+shader_param/damping = 0.0
+shader_param/scale = 0.5
+shader_param/hue_variation = 0.0
+shader_param/anim_speed = 0.0
+shader_param/anim_offset = 0.0
+shader_param/initial_linear_velocity_random = 0.0
+shader_param/initial_angle_random = 0.0
+shader_param/angular_velocity_random = 0.0
+shader_param/orbit_velocity_random = 0.0
+shader_param/linear_accel_random = 0.0
+shader_param/radial_accel_random = 0.0
+shader_param/tangent_accel_random = 0.0
+shader_param/damping_random = 0.0
+shader_param/scale_random = 0.0
+shader_param/hue_variation_random = 0.0
+shader_param/anim_speed_random = 0.0
+shader_param/anim_offset_random = 0.0
+shader_param/lifetime_randomness = 0.0
+shader_param/color_value = Color( 1, 1, 1, 1 )
+shader_param/trail_divisor = 1
+shader_param/gravity = Vector3( 0, -1e-06, 0 )
+shader_param/color_ramp = SubResource( 5 )
+shader_param/scale_texture = SubResource( 7 )
+
 [sub_resource type="OpenSimplexNoise" id=17]
 octaves = 1
-period = 32.0
 
 [sub_resource type="NoiseTexture" id=18]
 width = 1280
@@ -83,7 +336,6 @@ noise = SubResource( 17 )
 [sub_resource type="OpenSimplexNoise" id=19]
 seed = 5
 octaves = 1
-period = 32.0
 
 [sub_resource type="NoiseTexture" id=20]
 width = 1280
@@ -94,7 +346,6 @@ noise = SubResource( 19 )
 [sub_resource type="OpenSimplexNoise" id=21]
 seed = 8
 octaves = 1
-period = 32.0
 
 [sub_resource type="NoiseTexture" id=22]
 width = 1280
@@ -104,7 +355,7 @@ noise = SubResource( 21 )
 
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 11 )
-shader_param/speed = 0.03
+shader_param/speed = 0.05
 shader_param/strength = 0.5
 shader_param/tint = Color( 0.07, 0.5195, 1, 1 )
 shader_param/noise_img1 = SubResource( 18 )
@@ -112,7 +363,7 @@ shader_param/noise_img2 = SubResource( 20 )
 shader_param/noise_img3 = SubResource( 22 )
 
 [sub_resource type="ImageTexture" id=24]
-size = Vector2( 2560, 2560 )
+size = Vector2( 1280, 1280 )
 
 [sub_resource type="Shader" id=25]
 code = "shader_type canvas_item;
@@ -132,11 +383,11 @@ shader_param/sprite = SubResource( 26 )
 [sub_resource type="ImageTexture" id=28]
 flags = 0
 flags = 0
-size = Vector2( 2580, 2580 )
+size = Vector2( 1300, 1300 )
 
 [sub_resource type="Curve" id=29]
 max_value = 10.0
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.858974, 1.11364 ), 6.91363, 6.91363, 0, 0, Vector2( 1, 6.65909 ), 65.1477, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.863248, 0.409091 ), 3.35885, 3.35885, 0, 0, Vector2( 1, 6.5 ), 121.559, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=30]
 curve = SubResource( 29 )
@@ -152,11 +403,11 @@ noise = SubResource( 31 )
 [sub_resource type="ShaderMaterial" id=33]
 shader = ExtResource( 38 )
 shader_param/overallVelocity = Vector3( 150, 150, 0 )
-shader_param/spawnDistance = 1280.0
-shader_param/spawnOrigin = Vector2( 1280, 1280 )
-shader_param/screenSize = 2560.0
+shader_param/spawnDistance = 640.0
+shader_param/spawnOrigin = Vector2( 640, 640 )
+shader_param/screenSize = 1280.0
 shader_param/wrapOffset = 20.0
-shader_param/scale = 0.5
+shader_param/scale = 0.4
 shader_param/scale_random = 0.2
 shader_param/map = SubResource( 32 )
 shader_param/angleOverLifetime = SubResource( 30 )
@@ -303,7 +554,31 @@ material = SubResource( 3 )
 z_index = -1
 amount = 30
 local_coords = false
+process_material = SubResource( 45 )
+texture = ExtResource( 1 )
+script = ExtResource( 10 )
+
+[node name="Wake_old" type="Particles2D" parent="PlayerBoat"]
+visible = false
+modulate = Color( 0.4, 0.4, 0.4, 1 )
+material = SubResource( 3 )
+z_index = -1
+emitting = false
+amount = 30
+local_coords = false
 process_material = SubResource( 8 )
+texture = ExtResource( 1 )
+script = ExtResource( 10 )
+
+[node name="Wake_old2" type="Particles2D" parent="PlayerBoat"]
+visible = false
+modulate = Color( 0.4, 0.4, 0.4, 1 )
+material = SubResource( 3 )
+z_index = -1
+emitting = false
+amount = 30
+local_coords = false
+process_material = SubResource( 47 )
 texture = ExtResource( 1 )
 script = ExtResource( 10 )
 
@@ -320,12 +595,13 @@ autoplay = true
 [node name="ParallaxBackground_Ocean" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer_Ocean" type="ParallaxLayer" parent="ParallaxBackground_Ocean"]
-motion_mirroring = Vector2( 2560, 2560 )
+position = Vector2( -10.4, 0 )
+motion_mirroring = Vector2( 1280, 1280 )
 
 [node name="ShaderOcean" type="Sprite" parent="ParallaxBackground_Ocean/ParallaxLayer_Ocean"]
 material = SubResource( 23 )
-position = Vector2( 1280, 1280 )
 texture = SubResource( 24 )
+centered = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -335,7 +611,7 @@ layer = 2
 
 [node name="ParallaxLayer_Wind" type="ParallaxLayer" parent="ParallaxBackground_Wind"]
 z_index = 1000
-motion_mirroring = Vector2( 2560, 2560 )
+motion_mirroring = Vector2( 1280, 1280 )
 
 [node name="WindContainer" type="ViewportContainer" parent="ParallaxBackground_Wind/ParallaxLayer_Wind"]
 material = SubResource( 27 )
@@ -347,7 +623,7 @@ __meta__ = {
 }
 
 [node name="WindViewport" type="Viewport" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer"]
-size = Vector2( 2580, 2580 )
+size = Vector2( 1300, 1300 )
 transparent_bg = true
 handle_input_locally = false
 render_target_clear_mode = 2
@@ -361,10 +637,10 @@ texture = SubResource( 28 )
 centered = false
 
 [node name="ShaderWind" type="Particles2D" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer/WindViewport"]
-modulate = Color( 1, 1, 1, 0.0980392 )
+modulate = Color( 1, 1, 1, 0.196078 )
 position = Vector2( -49.681, -162.929 )
 rotation = -0.785398
-amount = 80
+amount = 30
 lifetime = 5.0
 preprocess = 50.0
 randomness = 1.0
