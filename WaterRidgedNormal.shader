@@ -1,8 +1,6 @@
 shader_type canvas_item;
 
-uniform sampler2D noise_img1;
-uniform sampler2D noise_img2;
-uniform sampler2D noise_img3;
+uniform sampler2D wavemap;
 uniform float speed = 1.0;
 uniform float strength=0.7;
 uniform vec4 tint : hint_color;
@@ -36,14 +34,13 @@ float ridgenoise(float x){
 }
 
 float waveNoise(in vec2 uv, float time){
-	vec2 uv1 = vec2(uv.x + time*speed, uv.y);
-	vec2 uv2 = vec2(uv.x - time*speed, uv.y + time*speed);
-	vec2 uv3 = vec2(uv.x, uv.y - time*speed);
+	vec2 uv1 = mod(vec2(uv.x + time*speed, uv.y), vec2(1.0, 1.0));
+	vec2 uv2 = mod(vec2(uv.x - time*speed, uv.y + time*speed), vec2(1.0, 1.0));
+	vec2 uv3 = mod(vec2(uv.x, uv.y - time*speed), vec2(1.0, 1.0));
 	
-	
-	float noise_r = ridgenoise(texture( noise_img1, uv1 ).r);
-	float noise_g = ridgenoise(texture( noise_img2, uv2 ).g);
-	float noise_b = ridgenoise(texture( noise_img3, uv3 ).b);
+	float noise_r = ridgenoise(texture(wavemap, uv1).r);
+	float noise_g = ridgenoise(texture(wavemap, uv2).g);
+	float noise_b = ridgenoise(texture(wavemap, uv3).b);
 	
 	vec3 new_color = vec3(noise_r, noise_g, noise_b);
 	
