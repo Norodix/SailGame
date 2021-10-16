@@ -55,9 +55,16 @@ void vertex() {
 		TRANSFORM[3][1] = spawnOrigin[1] + y * spawnDistance;
 	}
 	else{
-		CUSTOM.y += DELTA / LIFETIME;
+		CUSTOM.y += DELTA / (LIFETIME * 1.007);
 	}
-	float angle = (texture(map, mod( vec2(TRANSFORM[3][0], TRANSFORM[3][1]) / 512.0, vec2(1.0))).r - 0.5) * PI / 3.0;
+	
+	
+	//snap around visibilityrectangle edges to make it look better
+	TRANSFORM[3][0] = mod(TRANSFORM[3][0] - wrapOffset/2.0, screenSize) + wrapOffset / 2.0;
+	TRANSFORM[3][1] = mod(TRANSFORM[3][1] - wrapOffset/2.0, screenSize) + wrapOffset / 2.0;
+	
+	vec2 mapTimeOffset = vec2(TRANSFORM[3][0] + TIME * 70.0, TRANSFORM[3][1]) / screenSize;
+	float angle = (texture(map, mapTimeOffset).r - 0.5) * PI / 3.0;
 	//curl effect at the end
 	float lifetimeFacingOffset = textureLod(angleOverLifetime, vec2(CUSTOM.y, 0.0), 0.0).r;
 	angle += lifetimeFacingOffset * CUSTOM.w;
@@ -82,9 +89,6 @@ void vertex() {
 	TRANSFORM[1][0] = TRANSFORM[1][0] * scaling; //
 	TRANSFORM[1][1] = TRANSFORM[1][1] * scaling; //
 	
-	//snap around visibilityrectangle edges to make it look better
-	TRANSFORM[3][0] = mod(TRANSFORM[3][0] - wrapOffset/2.0, screenSize) + wrapOffset / 2.0;
-	TRANSFORM[3][1] = mod(TRANSFORM[3][1] - wrapOffset/2.0, screenSize) + wrapOffset / 2.0;
 	//TRANSFORM[3][0] = TRANSFORM[3][0] > (screenSize + wrapOffset/2.0) ? TRANSFORM[3][0] - screenSize : TRANSFORM[3][0];
 	//TRANSFORM[3][1] = TRANSFORM[3][1] > (screenSize + wrapOffset/2.0) ? TRANSFORM[3][1] - screenSize : TRANSFORM[3][1];
 }

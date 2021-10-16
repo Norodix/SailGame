@@ -108,17 +108,20 @@ func _process(delta):
 
 
 func drawArrow(start: Vector2, end: Vector2, color: Color, lineWidth: float):
-	draw_line(start, end, color, lineWidth, true)
-	#Create the two spokes of the arrow
+#	draw_line(start, end, color, lineWidth, true)
+#	#Create the two spokes of the arrow
+#	var arrowAngle = (end-start).angle()
+#	var spokeLength = (start-end).length()/4
+#	var spoke1Start = Vector2(0, 0).rotated(arrowAngle) + end
+#	var spoke2Start = spoke1Start
+#	var spoke1End = Vector2(-spokeLength, -spokeLength).rotated(arrowAngle) + end
+#	var spoke2End = Vector2(-spokeLength, spokeLength).rotated(arrowAngle) + end
+#	draw_line(spoke1Start, spoke1End, color, lineWidth, true)
+#	draw_line(spoke2Start, spoke2End, color, lineWidth, true)
+#	draw_circle(end, lineWidth/2.0, color)
 	var arrowAngle = (end-start).angle()
-	var spokeLength = (start-end).length()/4
-	var spoke1Start = Vector2(0, 0).rotated(arrowAngle) + end
-	var spoke2Start = spoke1Start
-	var spoke1End = Vector2(-spokeLength, -spokeLength).rotated(arrowAngle) + end
-	var spoke2End = Vector2(-spokeLength, spokeLength).rotated(arrowAngle) + end
-	draw_line(spoke1Start, spoke1End, color, lineWidth, true)
-	draw_line(spoke2Start, spoke2End, color, lineWidth, true)
-	draw_circle(end, lineWidth/2.0, color)
+	$Arrow.rotation = arrowAngle + deg2rad(90)
+	$Arrow.position = (start + end) / 2
 	pass
 	
 func _draw():

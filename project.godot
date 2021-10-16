@@ -32,6 +32,10 @@ window/stretch/aspect="expand"
 
 singletons=[  ]
 
+[global]
+
+android=false
+
 [input]
 
 ui_up={

@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D wavemap;
+uniform sampler2D wake;
 uniform float speed = 1.0;
 uniform float strength=0.7;
 uniform vec4 tint : hint_color;
@@ -52,22 +53,24 @@ float waveNoise(in vec2 uv, float time){
 
 void fragment(){
 	float waveVal = waveNoise(UV, TIME);
+	//float wakeVal = texture(wake, UV).x;
 	
 	
-	float p = waveNoise(UV, TIME);
-	float h1 = waveNoise(UV + vec2(SCREEN_PIXEL_SIZE.x, 0.), TIME);
-	float v1 = waveNoise(UV + vec2(0., SCREEN_PIXEL_SIZE.y), TIME);
-       
-	vec2 norm = (vec2(p) - vec2(h1, v1)) * 3.5 + vec2(0.5);
+//	float p = waveNoise(UV, TIME);
+//	float h1 = waveNoise(UV + vec2(SCREEN_PIXEL_SIZE.x, 0.), TIME);
+//	float v1 = waveNoise(UV + vec2(0., SCREEN_PIXEL_SIZE.y), TIME);
+//
+//	vec2 norm = (vec2(p) - vec2(h1, v1)) * 3.5 + vec2(0.5);
    	//return (p - vec2(h1, v1));
 	
-	vec3 white = vec3(1, 1, 1);
+//	vec3 white = vec3(1, 1, 1);
 	
 	vec3 tint_hsb = rgb2hsb(tint.rgb);
 	tint_hsb.y -= waveVal;
 	tint_hsb.z -= (0.12-waveVal);
 	
 	COLOR.rgb = hsb2rgb(tint_hsb);
+	//COLOR.rgb= vec3(wakeVal);
 	//COLOR.rgb = tint.rgb;
 	//NORMAL = vec3(norm, 1.) * vec3(2., 2., 1.) - vec3(1., 1., 0.);
 	//COLOR.rgb = vec3(norm, 1.);
