@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Art/wake_circle.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -34,9 +34,11 @@
 [ext_resource path="res://Sounds/cmusounddesign__jf-glass-breaking.wav" type="AudioStream" id=32]
 [ext_resource path="res://Art/Sextant.png" type="Texture" id=33]
 [ext_resource path="res://Sounds/littleluigi__1-metal-bang.wav" type="AudioStream" id=34]
+[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=35]
 [ext_resource path="res://WindContainer.gd" type="Script" id=36]
 [ext_resource path="res://ShaderWind.gd" type="Script" id=37]
 [ext_resource path="res://Art/Winds/Wind.shader" type="Shader" id=38]
+[ext_resource path="res://Art/Exit.png" type="Texture" id=39]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -66,7 +68,8 @@ void vertex() {
 	float tex_scale = textureLod(scale_texture, vec2(CUSTOM.y, 0.0), 0.0).r;
 	float base_scale = tex_scale * scale;
 	
-	COLOR.a = textureLod(color_ramp, vec2(CUSTOM.y, 0.0), 0.0).a;
+	COLOR.a = 1.0;
+	COLOR.rgb = vec3(textureLod(color_ramp, vec2(CUSTOM.y, 0.0), 0.0).a);
 	TRANSFORM[0] = vec4(1.0, 0.0, 0.0, 0.0);
 	TRANSFORM[1] = vec4(0.0, 1.0, 0.0, 0.0);
 	TRANSFORM[2] = vec4(0.0, 0.0, 1.0, 0.0);
@@ -90,7 +93,7 @@ gradient = SubResource( 5 )
 
 [sub_resource type="Curve" id=7]
 max_value = 2.0
-_data = [ Vector2( 0, 0.313636 ), 0.0, 1.16054, 0, 0, Vector2( 1, 2 ), 0.697455, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.268182 ), 0.0, 1.70568, 0, 0, Vector2( 1, 2 ), 1.72812, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=8]
 curve = SubResource( 7 )
@@ -113,43 +116,47 @@ size = Vector2( 1280, 1280 )
 
 [sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
-render_mode blend_add;
-uniform sampler2D sprite;
+//render_mode blend_add;
+//uniform sampler2D sprite;
 
 void fragment(){
-	//COLOR.a = texture(TEXTURE, UV).x;
-	//COLOR.rgb = vec3(1.0);
-	COLOR.rgb = vec3(texture(TEXTURE, UV).x);
+	COLOR.a = texture(TEXTURE, UV).x;
+	COLOR.rgb = vec3(1.0);
+	//COLOR.rgb = vec3(texture(TEXTURE, UV).x);
 }"
 
-[sub_resource type="ImageTexture" id=13]
-
-[sub_resource type="ShaderMaterial" id=14]
+[sub_resource type="ShaderMaterial" id=13]
 shader = SubResource( 12 )
-shader_param/sprite = SubResource( 13 )
+
+[sub_resource type="CanvasItemMaterial" id=14]
+light_mode = 1
 
 [sub_resource type="ImageTexture" id=15]
 flags = 0
 flags = 0
-size = Vector2( 1300, 1300 )
+size = Vector2( 650, 650 )
 
-[sub_resource type="Curve" id=16]
+[sub_resource type="CanvasItemMaterial" id=16]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id=17]
 max_value = 10.0
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.9375, 0 ), -0.373202, 54.8182, 0, 0, Vector2( 1, 7.47727 ), 125.72, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=17]
-curve = SubResource( 16 )
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
 
-[sub_resource type="OpenSimplexNoise" id=18]
+[sub_resource type="OpenSimplexNoise" id=19]
 seed = 3
 octaves = 1
 period = 120.0
 
-[sub_resource type="NoiseTexture" id=19]
+[sub_resource type="NoiseTexture" id=20]
 seamless = true
-noise = SubResource( 18 )
+noise = SubResource( 19 )
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 38 )
 shader_param/overallVelocity = Vector3( 150, 150, 0 )
 shader_param/spawnDistance = 640.0
@@ -158,10 +165,10 @@ shader_param/screenSize = 640.0
 shader_param/wrapOffset = 10.0
 shader_param/scale = 0.2
 shader_param/scale_random = 0.1
-shader_param/map = SubResource( 19 )
-shader_param/angleOverLifetime = SubResource( 17 )
+shader_param/map = SubResource( 20 )
+shader_param/angleOverLifetime = SubResource( 18 )
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("CrateCounter/Control/Node2D:position")
@@ -200,16 +207,16 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ), Vector2( 1.3, 1.3 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=22]
+[sub_resource type="CircleShape2D" id=23]
 radius = 18.0
 
-[sub_resource type="ShaderMaterial" id=23]
+[sub_resource type="ShaderMaterial" id=24]
 shader = ExtResource( 14 )
 shader_param/speed = 6.0
 shader_param/amplitude = 0.2
 shader_param/vertical = 0.3
 
-[sub_resource type="SpriteFrames" id=24]
+[sub_resource type="SpriteFrames" id=25]
 animations = [ {
 "frames": [ ExtResource( 13 ), ExtResource( 29 ), ExtResource( 28 ), ExtResource( 30 ), ExtResource( 21 ), ExtResource( 33 ) ],
 "loop": true,
@@ -217,25 +224,56 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[sub_resource type="Theme" id=25]
+[sub_resource type="Theme" id=26]
 
-[sub_resource type="CircleShape2D" id=26]
-radius = 100.0
+[sub_resource type="CircleShape2D" id=27]
+radius = 125.0
 
-[sub_resource type="CapsuleShape2D" id=27]
+[sub_resource type="CircleShape2D" id=28]
+radius = 125.0
+
+[sub_resource type="CapsuleShape2D" id=29]
 radius = 36.0
 height = 10.0
 
-[sub_resource type="CapsuleShape2D" id=28]
+[sub_resource type="CapsuleShape2D" id=30]
 radius = 38.0
 height = 38.0
 
-[sub_resource type="RectangleShape2D" id=29]
+[sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 1000, 600 )
 
 [node name="World" type="Node2D"]
 position = Vector2( 450.319, 237.071 )
 script = ExtResource( 7 )
+
+[node name="PlayerBoatSmoothing2D" type="Node2D" parent="."]
+script = ExtResource( 35 )
+target = NodePath("../PlayerBoat")
+flags = 7
+
+[node name="BoatBodySmooth" type="Sprite" parent="PlayerBoatSmoothing2D"]
+position = Vector2( -20, 0 )
+rotation = 1.5708
+scale = Vector2( 0.262, 0.262 )
+texture = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="PlayerBoatSmoothing2D"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+
+[node name="SailSmooth" type="Node2D" parent="."]
+script = ExtResource( 35 )
+target = NodePath("../PlayerBoat/Sail")
+flags = 55
+
+[node name="SailSmooth" type="Sprite" parent="SailSmooth"]
+rotation = 1.57079
+scale = Vector2( 0.118017, 0.118017 )
+texture = ExtResource( 4 )
+hframes = 3
+frame = 2
 
 [node name="PlayerBoat" type="RigidBody2D" parent="."]
 mass = 20.0
@@ -245,6 +283,7 @@ angular_damp = 20.0
 script = ExtResource( 2 )
 
 [node name="BoatBody" type="Sprite" parent="PlayerBoat"]
+visible = false
 position = Vector2( -20, 0 )
 rotation = 1.5708
 scale = Vector2( 0.262, 0.262 )
@@ -270,11 +309,11 @@ angular_damp = 0.02
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat/Sail"]
-visible = false
 rotation = 3.14159
 shape = SubResource( 2 )
 
 [node name="Sail" type="Sprite" parent="PlayerBoat/Sail"]
+visible = false
 position = Vector2( 2.35, 0 )
 rotation = 1.57079
 scale = Vector2( 0.118017, 0.118017 )
@@ -292,14 +331,8 @@ stream_paused = true
 stream = ExtResource( 27 )
 volume_db = -16.227
 
-[node name="Camera2D" type="Camera2D" parent="PlayerBoat"]
-current = true
-smoothing_enabled = true
-smoothing_speed = 2.0
-
 [node name="Wake" type="Particles2D" parent="PlayerBoat"]
-modulate = Color( 0.4, 0.4, 0.4, 1 )
-self_modulate = Color( 0.4, 0.4, 0.4, 1 )
+self_modulate = Color( 0.29, 0.29, 0.29, 1 )
 material = SubResource( 3 )
 z_index = -1
 amount = 30
@@ -346,7 +379,7 @@ z_index = 1000
 motion_mirroring = Vector2( 1280, 1280 )
 
 [node name="WindContainer" type="ViewportContainer" parent="ParallaxBackground_Wind/ParallaxLayer_Wind"]
-material = SubResource( 14 )
+material = SubResource( 13 )
 margin_right = 1300.0
 margin_bottom = 1300.0
 stretch = true
@@ -358,7 +391,9 @@ __meta__ = {
 [node name="WindViewport" type="Viewport" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer"]
 size = Vector2( 650, 650 )
 handle_input_locally = false
+hdr = false
 disable_3d = true
+usage = 0
 render_target_clear_mode = 2
 render_target_update_mode = 3
 gui_disable_input = true
@@ -369,15 +404,15 @@ scale = Vector2( 15, 15 )
 texture = ExtResource( 9 )
 centered = false
 
-[node name="Blending" type="Sprite" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer/WindViewport"]
-process_priority = 2
-modulate = Color( 1, 1, 1, 0.0313726 )
-position = Vector2( -7.62939e-06, 0 )
+[node name="Blend" type="Sprite" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer/WindViewport"]
+modulate = Color( 0, 0, 0, 0.0784314 )
+material = SubResource( 14 )
+scale = Vector2( 2, 2 )
 texture = SubResource( 15 )
-centered = false
 
 [node name="ShaderWind" type="Particles2D" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer/WindViewport"]
 modulate = Color( 1, 1, 1, 0.196078 )
+material = SubResource( 16 )
 position = Vector2( -49.681, -162.929 )
 rotation = -0.785398
 amount = 15
@@ -386,7 +421,7 @@ preprocess = 50.0
 fixed_fps = 60
 visibility_rect = Rect2( 0, 0, 2570, 2570 )
 local_coords = false
-process_material = SubResource( 20 )
+process_material = SubResource( 21 )
 texture = ExtResource( 20 )
 script = ExtResource( 37 )
 
@@ -423,7 +458,7 @@ __meta__ = {
 
 [node name="CrateCounter" type="AnimationPlayer" parent="GUI"]
 playback_speed = 3.0
-anims/SizeBump = SubResource( 21 )
+anims/SizeBump = SubResource( 22 )
 
 [node name="Control" type="Control" parent="GUI/CrateCounter"]
 anchor_left = 1.0
@@ -478,7 +513,7 @@ position = Vector2( 785.388, 0 )
 script = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrateArea"]
-shape = SubResource( 22 )
+shape = SubResource( 23 )
 one_way_collision_margin = 0.0
 
 [node name="Break_wood" type="AudioStreamPlayer" parent="CrateArea"]
@@ -499,9 +534,9 @@ pitch_scale = 2.0
 stream = ExtResource( 34 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CrateArea"]
-material = SubResource( 23 )
+material = SubResource( 24 )
 scale = Vector2( 0.16, 0.16 )
-frames = SubResource( 24 )
+frames = SubResource( 25 )
 frame = 5
 
 [node name="TouchControls" type="CanvasLayer" parent="."]
@@ -509,8 +544,13 @@ frame = 5
 [node name="TouchControlsVisibilityNode" type="Control" parent="TouchControls"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 25 )
+margin_left = 0.667419
+margin_top = -0.667419
+margin_right = 0.66748
+margin_bottom = -0.667419
+theme = SubResource( 26 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -519,7 +559,7 @@ position = Vector2( 16, 16 )
 scale = Vector2( 0.237091, 0.237091 )
 normal = ExtResource( 26 )
 pressed = ExtResource( 26 )
-shape = SubResource( 26 )
+shape = SubResource( 27 )
 action = "Reset"
 visibility_mode = 1
 
@@ -528,11 +568,26 @@ visible = false
 scale = Vector2( 0.4, 0.4 )
 flip_v = true
 
+[node name="ExitButton" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
+position = Vector2( 16, 80 )
+scale = Vector2( 0.237091, 0.237091 )
+normal = ExtResource( 39 )
+pressed = ExtResource( 39 )
+shape = SubResource( 28 )
+action = "ui_cancel"
+visibility_mode = 1
+
+[node name="Sprite" type="Sprite" parent="TouchControls/TouchControlsVisibilityNode/ExitButton"]
+visible = false
+scale = Vector2( 0.4, 0.4 )
+flip_v = true
+
 [node name="Control" type="Control" parent="TouchControls/TouchControlsVisibilityNode"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -287.0
+margin_top = -287.667
+margin_bottom = -0.667419
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -541,7 +596,7 @@ __meta__ = {
 position = Vector2( 16, 0 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 17 )
-shape = SubResource( 27 )
+shape = SubResource( 29 )
 action = "tighten"
 visibility_mode = 1
 
@@ -555,7 +610,7 @@ texture = ExtResource( 16 )
 position = Vector2( 16, 100 )
 normal = ExtResource( 18 )
 pressed = ExtResource( 18 )
-shape = SubResource( 28 )
+shape = SubResource( 30 )
 action = "loosen"
 visibility_mode = 1
 
@@ -568,7 +623,7 @@ flip_v = true
 [node name="Steer" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode"]
 position = Vector2( 100, 0 )
 z_index = -1
-shape = SubResource( 29 )
+shape = SubResource( 31 )
 shape_visible = false
 action = "MouseSteer"
 [connection signal="body_entered" from="CrateArea" to="CrateArea" method="_on_CrateArea_body_entered"]

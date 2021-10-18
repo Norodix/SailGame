@@ -41,5 +41,6 @@ func _process(delta):
 		self.emitting = false
 	else:
 		self.emitting = true
+	self.process_material.set("angle", -parent.rotation_degrees - 90)
 	#self.process_material.set("scale", scalefactor)
 	#self.process_material.scale

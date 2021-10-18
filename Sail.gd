@@ -77,7 +77,9 @@ func _integrate_forces(state):
 	else:
 		lineTaut=false
 	
-	$Sail.frame=framenum
+	#$Sail.frame=framenum
+	var SailVisual = get_node("../../SailSmooth/SailSmooth")
+	SailVisual.frame=framenum
 
 	
 	#calculate the normal for the sail

@@ -6,7 +6,7 @@ extends RigidBody2D
 # var b = "text"
 
 var movespeed = 500
-var angularvelocity = 0.02
+var angularvelocity = 1.2
 var angle = 0
 var motorEnabled = 0
 
@@ -35,20 +35,20 @@ func _process(delta):
 	#call draw function every iteration
 	update()
 	
-	#Handle camera zoom
-	var zoomVal = $Camera2D.zoom[0]
-#	if Input.is_action_just_released("zoomIn"):
-#		zoomVal -= zoomStep*5
-	if Input.is_action_pressed("zoomIn"):
-		zoomVal -= zoomStep
-	#if Input.is_action_just_released("zoomOut"):
-#		zoomVal += zoomStep*5
-	if Input.is_action_pressed("zoomOut"):
-		zoomVal += zoomStep
-	
-	zoomVal = clamp(zoomVal, zoomMin, zoomMax)
-	
-	$Camera2D.zoom = Vector2(zoomVal, zoomVal)
+#	#Handle camera zoom
+#	var zoomVal = $Camera2D.zoom[0]
+##	if Input.is_action_just_released("zoomIn"):
+##		zoomVal -= zoomStep*5
+#	if Input.is_action_pressed("zoomIn"):
+#		zoomVal -= zoomStep
+#	#if Input.is_action_just_released("zoomOut"):
+##		zoomVal += zoomStep*5
+#	if Input.is_action_pressed("zoomOut"):
+#		zoomVal += zoomStep
+#
+#	zoomVal = clamp(zoomVal, zoomMin, zoomMax)
+#
+#	$Camera2D.zoom = Vector2(zoomVal, zoomVal)
 
 
 	#Steer with key events
@@ -104,7 +104,7 @@ func _process(delta):
 	#Make the wake brighter as the ship is traveling faster
 	var waveModColor = map(0, 400, 0, 0.6, self.linear_velocity.length())
 	$Wake.modulate = Color(waveModColor, waveModColor, waveModColor)
-
+	
 
 
 func drawArrow(start: Vector2, end: Vector2, color: Color, lineWidth: float):
@@ -120,8 +120,8 @@ func drawArrow(start: Vector2, end: Vector2, color: Color, lineWidth: float):
 #	draw_line(spoke2Start, spoke2End, color, lineWidth, true)
 #	draw_circle(end, lineWidth/2.0, color)
 	var arrowAngle = (end-start).angle()
-	$Arrow.rotation = arrowAngle + deg2rad(90)
-	$Arrow.position = (start + end) / 2
+	$Arrow.global_rotation = arrowAngle + deg2rad(90)
+	$Arrow.global_position = (start + end) / 2
 	pass
 	
 func _draw():
@@ -129,11 +129,13 @@ func _draw():
 	var arrowLineWidth = 3.0
 	var arrowColor = Color(1, 0, 0)
 	var crate = get_node("../CrateArea")
-	var crateDirection = crate.global_position - self.global_position
-	crateDirection=crateDirection.normalized().rotated(-self.global_rotation)
+	var visualSelf = get_node("../PlayerBoatSmoothing2D/BoatBodySmooth")
+	var crateDirection = crate.global_position - visualSelf.global_position
+	crateDirection=crateDirection.normalized()
+	#crateDirection=crateDirection.normalized().rotated(-visualSelf.global_rotation)
 	#crateDirection=crateDirection.rotated(-self.global_rotation)
-	var start = crateDirection*100
-	var end   = crateDirection*120
+	var start = crateDirection*100 + visualSelf.global_position
+	var end   = start + crateDirection*20
 	drawArrow(start, end, arrowColor, arrowLineWidth)
 	#drawArrow(start, end+(end-start)*2, Color(0, 1, 1), arrowLineWidth)
 	
@@ -142,18 +144,19 @@ func _draw():
 
 func _integrate_forces(state):
 	var angle = 0
-	if turnLeft:
+
+	if self.turnLeft:
 		angle += -1
-	if turnRight:
+	if self.turnRight:
 		angle += 1
 	
-	if motorEnabled: #obsolete
-		if Input.is_action_pressed("up"):
-			self.applied_force = Vector2(1000, 0).rotated(self.rotation)
-		elif Input.is_action_pressed("down"):
-			self.applied_force = Vector2(-1000, 0).rotated(self.rotation)
-		else:
-			self.applied_force = Vector2(0, 0)
+#	if motorEnabled: #obsolete
+#		if Input.is_action_pressed("up"):
+#			self.applied_force = Vector2(1000, 0).rotated(self.rotation)
+#		elif Input.is_action_pressed("down"):
+#			self.applied_force = Vector2(-1000, 0).rotated(self.rotation)
+#		else:
+#			self.applied_force = Vector2(0, 0)
 	
 	#calculate ship body direction
 	var facing=Vector2(cos(global_rotation), sin(global_rotation))
@@ -166,7 +169,7 @@ func _integrate_forces(state):
 	
 	#control the body of the ship by rotating it
 	if (angle != 0):
-		state.set_angular_velocity(angle * angularvelocity / state.get_step() \
+		state.set_angular_velocity(angle * angularvelocity \
 									* (0.05 + self.linear_velocity.length()/200))
 
 	

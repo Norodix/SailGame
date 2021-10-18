@@ -21,6 +21,10 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().change_scene("res://Menu/TitleScreen.tscn")
+		
+	#Change physics fps to frame fps so the animations are always smooth
+	#might introduce lots of bugs, find better solution later
+	#Engine.iterations_per_second = Engine.get_frames_per_second()
 
 
 
