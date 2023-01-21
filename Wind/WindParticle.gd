@@ -1,20 +1,23 @@
 tool
 extends Node2D
 export(int, -1, 1) var turn_direction = 1
-export var lifetime = 3.0
-export var max_points = 10
-export var wind_speed = 500
+export var lifetime : float = 3.0
+export var max_points : int = 10
+export var trail_length : float = 200
+export var wind_speed : float = 500
 export var wind_direction = Vector2( 0.707107, 0.707107 )
 export var width = 10
-export var curl_time = 1.0
-export var curl_tightness = 1.0
+export var curl_time : float = 1.0
+export var curl_tightness : float = 1.0
 
 const curl_tightness_multiplier = 20.0
 var curl_angle = 0.0
 var curled_direction = Vector2.ZERO
+var point_delta
 
 var time = 0.0
 onready var line = $Line2D
+var last_time = 0.0
 
 func _ready():
 	$Line2D.set_as_toplevel(true)
@@ -35,18 +38,24 @@ func _process(delta):
 		curl_angle += curl_tightness * curl_tightness_multiplier * delta * delta * turn_direction
 		curled_direction = curled_direction.rotated(curl_angle)
 	
-	self.global_position += curled_direction * wind_speed * delta
-	line.add_point(self.global_position)
-	if point_count > max_points:
-		line.remove_point(0)
+	self.global_position += curled_direction.normalized() * wind_speed * delta
+	
+	if time - last_time >= point_delta:
+		last_time = time
+		#add point
+		line.add_point(self.global_position)
+		if point_count > max_points:
+			line.remove_point(0)
 	
 	pass
 
 
 func fade_out():
 	var point_count = line.get_point_count()
-	if point_count > 0:
-		line.remove_point(0)
+	if (point_count) > 0:
+		if (time > last_time + point_delta):
+			line.remove_point(0)
+			last_time = time
 	else:
 		reset()
 
@@ -55,5 +64,7 @@ func reset():
 	curled_direction = wind_direction
 	curl_angle = 0.0
 	time = 0.0
+	last_time = 0.0
 	line.clear_points()
 	self.global_position = Vector2.ZERO
+	point_delta = trail_length / float(max_points) / wind_speed
