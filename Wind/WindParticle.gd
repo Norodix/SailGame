@@ -56,6 +56,8 @@ func _process(delta):
 		line.add_point(self.global_position)
 		if point_count > max_points:
 			line.remove_point(0)
+	else:
+		line.set_point_position(line.get_point_count()-1, self.global_position)
 	
 	pass
 
