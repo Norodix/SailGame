@@ -4,3 +4,4 @@
 
 [node name="WindParticleSpawner" type="Node2D"]
 script = ExtResource( 1 )
+lifetime_variation = 0.695

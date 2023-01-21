@@ -18,14 +18,14 @@ var curled_direction = Vector2.ZERO
 var point_delta
 
 var time = 0.0
-onready var line = $Line2D
+onready var line = $AntialiasedLine2D
 var last_time = 0.0
 var active = false
 
 signal finished
 
 func _ready():
-	$Line2D.set_as_toplevel(true)
+	line.set_as_toplevel(true)
 	reset()
 	pass # Replace with function body.
 
@@ -33,7 +33,7 @@ func _ready():
 func _process(delta):
 	if not active:
 		return
-	line = $Line2D
+	#line = $AntialiasedLine2D
 	time += delta
 	var point_count = line.get_point_count()
 	line.modulate = Color(1, 1, 1, float(point_count)/float(max_points))
@@ -79,5 +79,5 @@ func reset():
 	self.global_position = Vector2.ZERO
 	point_delta = trail_length / float(max_points) / wind_speed
 	active = false
-	print("I finished: ", self)
+	#print("I finished: ", self)
 	emit_signal("finished", self)
