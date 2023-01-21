@@ -32,9 +32,7 @@ func map(a, b, c, d, v):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#call draw function every iteration
-	update()
-	
+	drawArrow()
 #	#Handle camera zoom
 #	var zoomVal = $Camera2D.zoom[0]
 ##	if Input.is_action_just_released("zoomIn"):
@@ -107,38 +105,16 @@ func _process(delta):
 	
 
 
-func drawArrow(start: Vector2, end: Vector2, color: Color, lineWidth: float):
-#	draw_line(start, end, color, lineWidth, true)
-#	#Create the two spokes of the arrow
-#	var arrowAngle = (end-start).angle()
-#	var spokeLength = (start-end).length()/4
-#	var spoke1Start = Vector2(0, 0).rotated(arrowAngle) + end
-#	var spoke2Start = spoke1Start
-#	var spoke1End = Vector2(-spokeLength, -spokeLength).rotated(arrowAngle) + end
-#	var spoke2End = Vector2(-spokeLength, spokeLength).rotated(arrowAngle) + end
-#	draw_line(spoke1Start, spoke1End, color, lineWidth, true)
-#	draw_line(spoke2Start, spoke2End, color, lineWidth, true)
-#	draw_circle(end, lineWidth/2.0, color)
-	var arrowAngle = (end-start).angle()
-	$Arrow.global_rotation = arrowAngle + deg2rad(90)
-	$Arrow.global_position = (start + end) / 2
-	pass
-	
-func _draw():
-	#Draw indicator arrow
-	var arrowLineWidth = 3.0
-	var arrowColor = Color(1, 0, 0)
+func drawArrow():
 	var crate = get_node("../CrateArea")
 	var visualSelf = get_node("../PlayerBoatSmoothing2D/BoatBodySmooth")
 	var crateDirection = crate.global_position - visualSelf.global_position
 	crateDirection=crateDirection.normalized()
-	#crateDirection=crateDirection.normalized().rotated(-visualSelf.global_rotation)
-	#crateDirection=crateDirection.rotated(-self.global_rotation)
-	var start = crateDirection*100 + visualSelf.global_position
-	var end   = start + crateDirection*20
-	drawArrow(start, end, arrowColor, arrowLineWidth)
-	#drawArrow(start, end+(end-start)*2, Color(0, 1, 1), arrowLineWidth)
-	
+	var start = crateDirection * 100 + visualSelf.global_position
+	var end   = start + crateDirection * 20
+	var arrowAngle = crateDirection.angle()
+	$Arrow.global_rotation = arrowAngle + deg2rad(90)
+	$Arrow.global_position = (start + end) / 2
 	pass
 
 
