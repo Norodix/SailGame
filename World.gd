@@ -9,6 +9,7 @@ var crateCount = 0
 var save_data = {
 		"score" : 0,
 	}
+const savename = "user://Sailsave.save"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,7 +34,6 @@ func _process(delta):
 
 func load_game():
 	var save_game = File.new()
-	var savename = "user://Sailsave.json"
 	if not save_game.file_exists(savename):
 		return # Error! We don't have a save to load.
 
@@ -47,8 +47,6 @@ func load_game():
 
 func save_game():
 	var save_game = File.new()
-	var savename = "user://Sailsave.json"
-
 	save_game.open(savename, File.WRITE)
 	save_game.store_var(save_data)	
 	save_game.close()
