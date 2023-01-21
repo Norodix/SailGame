@@ -40,9 +40,6 @@ func _on_CrateArea_body_entered(body):
 		var angle = randf()*2*PI
 		self.position += Vector2(cos(angle)*r, sin(angle)*r)
 	
-	#print(get_node("Break_" + sounds[$AnimatedSprite.frame]))
-	#print($AnimatedSprite.frame)
-	sounds[$AnimatedSprite.frame].play()
-	#$Break.play()
-	$AnimatedSprite.frame = randi() % frameCount
+		sounds[$AnimatedSprite.frame].play()
+		$AnimatedSprite.frame = randi() % frameCount
 
