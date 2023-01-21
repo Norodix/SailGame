@@ -6,15 +6,19 @@ extends Node2D
 # var b = "text"
 var windspeed=Vector2(50, 50)*3
 var crateCount = 0
-
+var save_data = {
+		"score" : 0,
+	}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	pass # Replace with function body.
+	load_game()
+	crateCount = save_data["score"]
+	$GUI/CrateCounter/Control/Node2D/Label.text = "x " + var2str(crateCount)
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("Reset"):
 		get_tree().reload_current_scene()
@@ -27,7 +31,27 @@ func _process(delta):
 	#Engine.iterations_per_second = Engine.get_frames_per_second()
 
 
+func load_game():
+	var save_game = File.new()
+	var savename = "user://Sailsave.json"
+	if not save_game.file_exists(savename):
+		return # Error! We don't have a save to load.
 
+	save_game.open(savename, File.READ)
+	var loaded_save = save_game.get_var()
+
+	if loaded_save.has("score"):
+		save_data["score"] = loaded_save["score"]
+	save_game.close()
+
+
+func save_game():
+	var save_game = File.new()
+	var savename = "user://Sailsave.json"
+
+	save_game.open(savename, File.WRITE)
+	save_game.store_var(save_data)	
+	save_game.close()
 
 
 
@@ -35,3 +59,5 @@ func _on_CrateArea_pickUp():
 	crateCount += 1
 	$GUI/CrateCounter.play("SizeBump")
 	$GUI/CrateCounter/Control/Node2D/Label.text = "x " + var2str(crateCount)
+	save_data.score = crateCount
+	save_game()
