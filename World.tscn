@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Art/wake_circle.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Art/Ocean/WaveMap.png" type="Texture" id=6]
 [ext_resource path="res://World.gd" type="Script" id=7]
 [ext_resource path="res://Art/RedArrow.png" type="Texture" id=8]
-[ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://Wake.gd" type="Script" id=10]
 [ext_resource path="res://WaterRidgedNormal.shader" type="Shader" id=11]
 [ext_resource path="res://DebugOverlay.gd" type="Script" id=12]
@@ -19,7 +18,6 @@
 [ext_resource path="res://Art/Coil.png" type="Texture" id=17]
 [ext_resource path="res://Art/UnCoil.png" type="Texture" id=18]
 [ext_resource path="res://theme.theme" type="Theme" id=19]
-[ext_resource path="res://Art/Winds/Wind_ball.png" type="Texture" id=20]
 [ext_resource path="res://Art/Compass.png" type="Texture" id=21]
 [ext_resource path="res://Sounds/gronnie__wooden-box-breaking-sound-effects.wav" type="AudioStream" id=22]
 [ext_resource path="res://Sounds/lydmakeren__boat-waves-2_trimmed.wav" type="AudioStream" id=23]
@@ -35,10 +33,8 @@
 [ext_resource path="res://Art/Sextant.png" type="Texture" id=33]
 [ext_resource path="res://Sounds/littleluigi__1-metal-bang.wav" type="AudioStream" id=34]
 [ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=35]
-[ext_resource path="res://WindContainer.gd" type="Script" id=36]
-[ext_resource path="res://ShaderWind.gd" type="Script" id=37]
-[ext_resource path="res://Art/Winds/Wind.shader" type="Shader" id=38]
 [ext_resource path="res://Art/Exit.png" type="Texture" id=39]
+[ext_resource path="res://Wind/WindParticleSpawner.tscn" type="PackedScene" id=40]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -113,60 +109,6 @@ shader_param/wavemap = ExtResource( 6 )
 
 [sub_resource type="ImageTexture" id=11]
 size = Vector2( 1280, 1280 )
-
-[sub_resource type="Shader" id=12]
-code = "shader_type canvas_item;
-//render_mode blend_add;
-//uniform sampler2D sprite;
-
-void fragment(){
-	COLOR.a = texture(TEXTURE, UV).x;
-	COLOR.rgb = vec3(1.0);
-	//COLOR.rgb = vec3(texture(TEXTURE, UV).x);
-}"
-
-[sub_resource type="ShaderMaterial" id=13]
-shader = SubResource( 12 )
-
-[sub_resource type="CanvasItemMaterial" id=14]
-light_mode = 1
-
-[sub_resource type="ImageTexture" id=15]
-flags = 0
-flags = 0
-size = Vector2( 650, 650 )
-
-[sub_resource type="CanvasItemMaterial" id=16]
-blend_mode = 1
-light_mode = 1
-
-[sub_resource type="Curve" id=17]
-max_value = 10.0
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.9375, 0 ), -0.373202, 54.8182, 0, 0, Vector2( 1, 7.47727 ), 125.72, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=18]
-curve = SubResource( 17 )
-
-[sub_resource type="OpenSimplexNoise" id=19]
-seed = 3
-octaves = 1
-period = 120.0
-
-[sub_resource type="NoiseTexture" id=20]
-seamless = true
-noise = SubResource( 19 )
-
-[sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 38 )
-shader_param/overallVelocity = Vector3( 150, 150, 0 )
-shader_param/spawnDistance = 640.0
-shader_param/spawnOrigin = Vector2( 300, 300 )
-shader_param/screenSize = 640.0
-shader_param/wrapOffset = 10.0
-shader_param/scale = 0.2
-shader_param/scale_random = 0.1
-shader_param/map = SubResource( 20 )
-shader_param/angleOverLifetime = SubResource( 18 )
 
 [sub_resource type="Animation" id=22]
 step = 0.01
@@ -358,6 +300,11 @@ rotation = 1.5708
 scale = Vector2( 0.1, 0.08 )
 texture = ExtResource( 8 )
 
+[node name="WindParticleSpawner" parent="PlayerBoat" instance=ExtResource( 40 )]
+position = Vector2( 150, 0 )
+spawn_extents = Vector2( 1500, 1000 )
+wind = Vector2( 150, 150 )
+
 [node name="ParallaxBackground_Ocean" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer_Ocean" type="ParallaxLayer" parent="ParallaxBackground_Ocean"]
@@ -370,60 +317,6 @@ centered = false
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="ParallaxBackground_Wind" type="ParallaxBackground" parent="."]
-layer = 2
-
-[node name="ParallaxLayer_Wind" type="ParallaxLayer" parent="ParallaxBackground_Wind"]
-z_index = 1000
-motion_mirroring = Vector2( 1280, 1280 )
-
-[node name="WindContainer" type="ViewportContainer" parent="ParallaxBackground_Wind/ParallaxLayer_Wind"]
-material = SubResource( 13 )
-margin_right = 1300.0
-margin_bottom = 1300.0
-stretch = true
-script = ExtResource( 36 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WindViewport" type="Viewport" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer"]
-size = Vector2( 650, 650 )
-handle_input_locally = false
-hdr = false
-disable_3d = true
-usage = 0
-render_target_clear_mode = 2
-render_target_update_mode = 3
-gui_disable_input = true
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer/WindViewport"]
-visible = false
-scale = Vector2( 15, 15 )
-texture = ExtResource( 9 )
-centered = false
-
-[node name="Blend" type="Sprite" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer/WindViewport"]
-modulate = Color( 0, 0, 0, 0.0784314 )
-material = SubResource( 14 )
-scale = Vector2( 2, 2 )
-texture = SubResource( 15 )
-
-[node name="ShaderWind" type="Particles2D" parent="ParallaxBackground_Wind/ParallaxLayer_Wind/WindContainer/WindViewport"]
-modulate = Color( 1, 1, 1, 0.196078 )
-material = SubResource( 16 )
-position = Vector2( -49.681, -162.929 )
-rotation = -0.785398
-amount = 15
-lifetime = 7.0
-preprocess = 50.0
-fixed_fps = 60
-visibility_rect = Rect2( 0, 0, 2570, 2570 )
-local_coords = false
-process_material = SubResource( 21 )
-texture = ExtResource( 20 )
-script = ExtResource( 37 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -626,5 +519,6 @@ z_index = -1
 shape = SubResource( 31 )
 shape_visible = false
 action = "MouseSteer"
+
 [connection signal="body_entered" from="CrateArea" to="CrateArea" method="_on_CrateArea_body_entered"]
 [connection signal="pickUp" from="CrateArea" to="." method="_on_CrateArea_pickUp"]

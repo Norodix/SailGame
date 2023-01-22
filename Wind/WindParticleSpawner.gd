@@ -8,6 +8,8 @@ export var group_count_max = 5
 export var lifetime_min = 1.0
 export var lifetime_max = 6.0
 export var lifetime_variation = 0.2
+export var wind = Vector2(100.0, 100.0)
+
 
 onready var windparticle = preload("WindParticle.tscn")
 
@@ -27,7 +29,7 @@ func _ready():
 
 func _process(delta):
 	if particles_passive.size() >= group_count_max:
-		var spawnpoint = Vector2(randf()*spawn_extents.x, randf()*spawn_extents.y)
+		var spawnpoint = Vector2((randf()-0.5)*spawn_extents.x, (randf()-0.5)*spawn_extents.y)
 		var spawncount = randi() % (group_count_max - group_count_min) + group_count_min
 		#spawnpoint /= 5.0
 		var group_lifetime = range_lerp(randf(), 0, 1, lifetime_min, lifetime_max)
@@ -36,9 +38,9 @@ func _process(delta):
 			#var rot_dir = 1 if randi()%2 else -1
 			var offset = Vector2(randf() - 0.5, randf() - 0.5) * spawn_variation_range
 			var rot_dir = 1
-			if offset.dot(Vector2(1, -1)) > 0:
+			if offset.dot(wind.rotated(deg2rad(90))) > 0:
 				rot_dir = -1
-			var pos = spawnpoint + offset
+			var pos = self.global_position + spawnpoint + offset
 			
 			spawn_particle(pos, l, rot_dir)
 		pass
@@ -49,6 +51,8 @@ func spawn_particle(position, lifetime, turn_direction):
 	p.position = position
 	p.lifetime = lifetime
 	p.turn_direction = turn_direction
+	p.wind_speed = wind.length()
+	p.wind_direction = wind.normalized()
 	p.active = true
 	particles_passive.erase(p)
 	particles_active.append(p)

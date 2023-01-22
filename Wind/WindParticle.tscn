@@ -27,11 +27,11 @@ size = Vector2( 256, 256 )
 position = Vector2( 473.419, 479.402 )
 script = ExtResource( 1 )
 lifetime = 2.0
-max_points = 20
+max_points = 30
 trail_length = 100.0
 wind_speed = 100.0
 width = 4
-wave_amplitude = 30.0
+wave_amplitude = 20.0
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
