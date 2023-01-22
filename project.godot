@@ -35,6 +35,7 @@ _global_script_class_icons={
 config/name="Sailor"
 run/main_scene="res://Menu/TitleScreen.tscn"
 config/icon="res://Icon.png"
+config/windows_native_icon="res://Export/icon.ico"
 
 [autoload]
 
