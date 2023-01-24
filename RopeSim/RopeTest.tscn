@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://RopeSim/Rope.tscn" type="PackedScene" id=1]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 32.795, -3.78403, -32.795, 3.78403, 115, 11, -12.193, -15.1361, 12.193, 15.1361, 95, 40, -31.5336, -2.94314, 31.5336, 2.94314, 142, 68, 1.68179, 25.6473, -1.68179, -25.6473, 219, 26, 16.3975, 4.62493, -16.3975, -4.62493, 182, 6, 8.82941, -4.20448, -8.82941, 4.20448, 146, -3, 15.977, -8.40896, -15.977, 8.40896, 139, 22, 10.9317, -2.52269, -10.9317, 2.52269, 115, 11 )
+}
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends PathFollow2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+func _process(delta):
+	self.unit_offset += 0.016/2
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Rope" parent="." instance=ExtResource( 1 )]
+position = Vector2( 129, 74.0179 )
+num_sections = 20
+length = 800.0
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 122, 77.0179 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 115, 11 )
+rotation = 3.01314
+script = SubResource( 2 )
