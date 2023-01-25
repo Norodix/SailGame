@@ -103,7 +103,16 @@ func _process(delta):
 	var waveModColor = map(0, 400, 0, 0.6, self.linear_velocity.length())
 	$Wake.modulate = Color(waveModColor, waveModColor, waveModColor)
 	
-
+	# Update rope properties
+	var apparent_wind = get_node("/root/World").windspeed - self.linear_velocity
+	var rope = get_node("../Rope")
+	var flag = get_node("../Flag")
+	rope.force = apparent_wind / 100.0
+	#rope.length = $RopeAnchor.global_position.distance_to($Sail/RopeAnchor.global_position)
+	#sin(deg2rad($Sail.maxangle / 2.0)) * 2 * 58
+	rope.length = Vector2(-58, 0).distance_to(Vector2(-48, 0).rotated(deg2rad($Sail.maxangle)))
+	flag.force = apparent_wind / 20.0
+	
 
 func drawArrow():
 	var crate = get_node("../CrateArea")

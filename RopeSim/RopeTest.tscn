@@ -31,6 +31,7 @@ func _process(delta):
 position = Vector2( 129, 74.0179 )
 num_sections = 20
 length = 800.0
+force = Vector2( 50, 50 )
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( 122, 77.0179 )

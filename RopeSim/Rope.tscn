@@ -8,5 +8,5 @@ end_point = Vector2( 500, 0 )
 length = 100.0
 
 [node name="Line2D" type="Line2D" parent="."]
-z_index = -2
-default_color = Color( 1, 0.4, 0.4, 1 )
+width = 2.0
+default_color = Color( 0, 0, 0, 1 )

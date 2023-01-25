@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Art/wake_circle.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Art/Ocean/WaveMap.png" type="Texture" id=6]
 [ext_resource path="res://World.gd" type="Script" id=7]
 [ext_resource path="res://Art/RedArrow.png" type="Texture" id=8]
+[ext_resource path="res://RopeSim/Rope.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Wake.gd" type="Script" id=10]
 [ext_resource path="res://WaterRidgedNormal.shader" type="Shader" id=11]
 [ext_resource path="res://DebugOverlay.gd" type="Script" id=12]
@@ -35,6 +36,9 @@
 [ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=35]
 [ext_resource path="res://Art/Exit.png" type="Texture" id=39]
 [ext_resource path="res://Wind/WindParticleSpawner.tscn" type="PackedScene" id=40]
+
+[sub_resource type="Curve" id=32]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 44.6475
@@ -190,6 +194,7 @@ position = Vector2( 450.319, 237.071 )
 script = ExtResource( 7 )
 
 [node name="PlayerBoatSmoothing2D" type="Node2D" parent="."]
+z_index = -1
 script = ExtResource( 35 )
 target = NodePath("../PlayerBoat")
 flags = 7
@@ -205,7 +210,16 @@ current = true
 smoothing_enabled = true
 smoothing_speed = 2.0
 
+[node name="Rope" parent="." instance=ExtResource( 9 )]
+z_index = -1
+num_sections = 15
+num_iterations = 20
+startpoint_target = NodePath("../PlayerBoat/RopeAnchor")
+endpoint_target = NodePath("../PlayerBoat/Sail/RopeAnchor")
+
 [node name="SailSmooth" type="Node2D" parent="."]
+position = Vector2( -32.319, -0.0709991 )
+z_index = 1
 script = ExtResource( 35 )
 target = NodePath("../PlayerBoat/Sail")
 flags = 55
@@ -216,6 +230,24 @@ scale = Vector2( 0.118017, 0.118017 )
 texture = ExtResource( 4 )
 hframes = 3
 frame = 2
+
+[node name="Flag" parent="." instance=ExtResource( 9 )]
+visible = false
+z_index = 20
+end_point = Vector2( 0, 0 )
+end_lock = false
+num_sections = 5
+num_iterations = 20
+length = 20.0
+startpoint_target = NodePath("../PlayerBoat/PinJoint2D")
+
+[node name="Line2D" parent="Flag" index="0"]
+visible = false
+width = 4.0
+width_curve = SubResource( 32 )
+default_color = Color( 0.890196, 0.0156863, 0.0156863, 1 )
+joint_mode = 2
+begin_cap_mode = 2
 
 [node name="PlayerBoat" type="RigidBody2D" parent="."]
 mass = 20.0
@@ -242,6 +274,9 @@ node_a = NodePath("../Sail")
 node_b = NodePath("..")
 bias = 0.9
 
+[node name="RopeAnchor" type="Position2D" parent="PlayerBoat"]
+position = Vector2( -61.319, -0.0709991 )
+
 [node name="Sail" type="RigidBody2D" parent="PlayerBoat"]
 position = Vector2( -32, 0 )
 gravity_scale = 0.0
@@ -249,6 +284,9 @@ can_sleep = false
 linear_damp = 0.5
 angular_damp = 0.02
 script = ExtResource( 3 )
+
+[node name="RopeAnchor" type="Position2D" parent="PlayerBoat/Sail"]
+position = Vector2( -16.319, -0.0709991 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBoat/Sail"]
 rotation = 3.14159
@@ -261,7 +299,6 @@ rotation = 1.57079
 scale = Vector2( 0.118017, 0.118017 )
 texture = ExtResource( 4 )
 hframes = 3
-frame = 2
 
 [node name="RopeCreak" type="AudioStreamPlayer" parent="PlayerBoat/Sail"]
 stream = ExtResource( 25 )
@@ -309,14 +346,14 @@ wind = Vector2( 150, 150 )
 
 [node name="ParallaxLayer_Ocean" type="ParallaxLayer" parent="ParallaxBackground_Ocean"]
 motion_mirroring = Vector2( 1280, 1280 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ShaderOcean" type="Sprite" parent="ParallaxBackground_Ocean/ParallaxLayer_Ocean"]
 material = SubResource( 10 )
 texture = SubResource( 11 )
 centered = false
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -326,7 +363,7 @@ anchor_bottom = 1.0
 margin_left = 16.0
 theme = ExtResource( 19 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="WindSpeed" type="Label" parent="GUI/Control"]
@@ -342,12 +379,9 @@ __meta__ = {
 [node name="BoatSpeed" type="Label" parent="GUI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -10.0
+margin_bottom = -12.0
 text = "Boat Speed: "
 valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CrateCounter" type="AnimationPlayer" parent="GUI"]
 playback_speed = 3.0
@@ -361,7 +395,7 @@ margin_left = -50.0
 margin_top = 35.0
 margin_right = -75.0
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="Node2D" type="Node2D" parent="GUI/CrateCounter/Control"]
@@ -372,9 +406,6 @@ margin_bottom = 19.0
 theme = ExtResource( 19 )
 text = "x 0"
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sprite" type="Sprite" parent="GUI/CrateCounter/Control/Node2D"]
 position = Vector2( -30, 10.201 )
@@ -404,6 +435,9 @@ __meta__ = {
 [node name="CrateArea" type="Area2D" parent="."]
 position = Vector2( 785.388, 0 )
 script = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrateArea"]
 shape = SubResource( 23 )
@@ -481,9 +515,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -287.667
 margin_bottom = -0.667419
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TightenButton" type="TouchScreenButton" parent="TouchControls/TouchControlsVisibilityNode/Control"]
 position = Vector2( 16, 0 )
@@ -522,3 +553,5 @@ action = "MouseSteer"
 
 [connection signal="body_entered" from="CrateArea" to="CrateArea" method="_on_CrateArea_body_entered"]
 [connection signal="pickUp" from="CrateArea" to="." method="_on_CrateArea_pickUp"]
+
+[editable path="Flag"]
