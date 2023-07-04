@@ -17,6 +17,7 @@ var zoomStep = 0.01
 #Variables that store steering data
 var turnLeft = 0
 var turnRight = 0
+var angular_velocity_current = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -128,12 +129,12 @@ func drawArrow():
 
 
 func _integrate_forces(state):
-	var angle = 0
+	var angle_input = 0
 
 	if self.turnLeft:
-		angle += -1
+		angle_input += -1
 	if self.turnRight:
-		angle += 1
+		angle_input += 1
 	
 #	if motorEnabled: #obsolete
 #		if Input.is_action_pressed("up"):
@@ -153,9 +154,10 @@ func _integrate_forces(state):
 	boatlabel.text="Boat speed: " + str(round(self.linear_velocity.length()))
 	
 	#control the body of the ship by rotating it
-	if (angle != 0):
-		state.set_angular_velocity(angle * angularvelocity \
-									* (0.05 + self.linear_velocity.length()/200))
+	var tartget_angular_velocity = angle_input * angularvelocity * (0.05 + self.linear_velocity.length()/200)
+	angular_velocity_current = lerp(angular_velocity_current, tartget_angular_velocity, 0.05)
+	state.set_angular_velocity(angular_velocity_current)
+#	print("t: ", tartget_angular_velocity, "a: ", state.angular_velocity)
 
 	
 	#Apply the windforce on when the line is taut
