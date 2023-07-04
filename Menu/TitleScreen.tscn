@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://FreeSansBold.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menu/TitleBackground.png" type="Texture" id=2]
 [ext_resource path="res://Menu/TitleScreen.gd" type="Script" id=3]
 [ext_resource path="res://Menu/TitleBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Digital-Patreon-Logo_Black.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -18,6 +19,8 @@ default_font = SubResource( 1 )
 size = 50
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="Theme" id=4]
@@ -38,14 +41,21 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=9]
 default_font = SubResource( 8 )
 
+[sub_resource type="DynamicFont" id=11]
+size = 27
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 11 )
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 2 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" parent="." instance=ExtResource( 4 )]
 
@@ -78,38 +88,54 @@ custom_constants/separation = 8
 alignment = 1
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 168.0
+margin_top = 136.0
 margin_right = 199.0
-margin_bottom = 224.0
+margin_bottom = 192.0
 focus_neighbour_top = NodePath("../Credits")
 focus_neighbour_bottom = NodePath("../Tutorial")
-custom_styles/focus = SubResource( 5 )
 custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+custom_styles/focus = SubResource( 5 )
 text = "Play"
 flat = true
 align = 0
 
 [node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 232.0
+margin_top = 200.0
 margin_right = 199.0
-margin_bottom = 288.0
+margin_bottom = 256.0
 focus_neighbour_top = NodePath("../Play")
 focus_neighbour_bottom = NodePath("../Credits")
-custom_styles/focus = SubResource( 6 )
 custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+custom_styles/focus = SubResource( 6 )
 text = "Tutorial"
 flat = true
 align = 0
 
 [node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 296.0
+margin_top = 264.0
 margin_right = 199.0
-margin_bottom = 352.0
+margin_bottom = 320.0
 focus_neighbour_top = NodePath("../Tutorial")
 focus_neighbour_bottom = NodePath("../Play")
-custom_styles/focus = SubResource( 7 )
 custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+custom_styles/focus = SubResource( 7 )
 text = "Credits"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 328.0
+margin_right = 199.0
+margin_bottom = 384.0
+focus_neighbour_top = NodePath("../Tutorial")
+focus_neighbour_bottom = NodePath("../Play")
+custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+custom_styles/focus = SubResource( 7 )
+text = "Exit"
 flat = true
 align = 0
 __meta__ = {
@@ -119,9 +145,9 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 visible = false
-margin_top = 520.0
+margin_top = 435.0
 margin_right = 944.0
-margin_bottom = 520.0
+margin_bottom = 435.0
 theme = SubResource( 9 )
 text = "Credits: 6polnic, cmusounddesign, codefhd, gronnie, ispeakwaves, littleluigi, lydmakeren, mario1298, michael-grinnell"
 scroll_active = false
@@ -142,6 +168,28 @@ scale = Vector2( 0.56, 0.56 )
 z_index = -1
 texture = ExtResource( 2 )
 centered = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_bottom = -20.0
+mouse_filter = 2
+
+[node name="Patreon" type="Button" parent="VBoxContainer"]
+margin_top = 520.0
+margin_right = 173.0
+margin_bottom = 580.0
+focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme = SubResource( 10 )
+custom_colors/font_color_hover = Color( 0.360784, 0.67451, 0.823529, 1 )
+text = "Norodix"
+icon = ExtResource( 5 )
+flat = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Patreon" to="." method="_on_Patreon_pressed"]
